@@ -1,4 +1,7 @@
+import { Fragment } from 'react';
+
 import NextLink from 'next/link';
+import { useRouter } from 'next/router';
 
 import { HamburgerIcon } from '@chakra-ui/icons';
 import {
@@ -15,6 +18,7 @@ import {
   VStack,
   useBoolean,
 } from '@chakra-ui/react';
+import { useTranslation } from 'next-i18next';
 
 import ECalmLogo from '../../assets/icons/e-calm-logo.svg';
 import TridentIcon from '../../assets/icons/trident.svg';
@@ -36,12 +40,36 @@ const NavLink = ({ title, url, onClick }: { title: string; url: string; onClick?
   </Box>
 );
 
+const localesTitles: Record<string, string> = {
+  ua: 'УКР',
+  ru: 'РУС',
+};
+
+const LanguageSwitcher = () => {
+  const { locale, locales, asPath } = useRouter();
+  return (
+    <Flex gap={1} mr={2}>
+      {locales!.map((l, i, arr) => (
+        <Fragment key={l}>
+          <NextLink href={asPath} locale={l}>
+            <Text color={locale === l ? 'black' : 'gray.500'}>{localesTitles[l]}</Text>
+          </NextLink>
+          {i !== arr.length - 1 && <Text>-</Text>}
+        </Fragment>
+      ))}
+    </Flex>
+  );
+};
+
 export const Header = () => {
   const [isOpened, setIsOpened] = useBoolean();
 
+  const { t } = useTranslation('common');
+
   return (
     <Box position="relative" sx={{ overflow: 'hidden' }}>
-      <Box display={{ base: 'flex', md: 'none' }} justifyContent="flex-end" py={1} px={2}>
+      <Box display={{ base: 'flex', md: 'none' }} alignItems="center" justifyContent="flex-end" py={1} px={2}>
+        <LanguageSwitcher />
         <IconButton
           onClick={setIsOpened.toggle}
           aria-label="open menu"
@@ -82,17 +110,20 @@ export const Header = () => {
         <Box flex="none" width={{ base: '64px', md: '80px' }}>
           <ECalmLogo />
         </Box>
-        <Box order={{ base: '1', md: '0' }} maxW="540px">
+        <Box order={{ base: '1', md: '0' }} maxW="650px">
           <Heading as="h1" size={{ xs: 'md', md: 'lg', lg: 'xl' }}>
-            Дистанційна професійна психологічна допомога
+            {t('header.title')}
           </Heading>
-          <Text fontSize={{ xs: 'md', md: 'lg', lg: 'xl' }}>
-            Безкоштовний, дистанційний онлайн-сервіс для українських родин, які потребують психологічної допомоги.
-          </Text>
+          <Text fontSize={{ xs: 'md', md: 'lg', lg: 'xl' }}>{t('header.subTitle')}</Text>
         </Box>
-        <Box flex="none" width={{ base: '64px', md: '80px' }} ml={{ md: 'auto' }}>
-          <TridentIcon />
-        </Box>
+        <Flex ml={{ md: 'auto' }}>
+          <Box display={{ base: 'none', md: 'flex' }} mr={8}>
+            <LanguageSwitcher />
+          </Box>
+          <Box flex="none" width={{ base: '64px', md: '80px' }}>
+            <TridentIcon />
+          </Box>
+        </Flex>
       </Flex>
 
       <Box display={{ base: 'none', md: 'flex' }} px={[4, 8]}>
