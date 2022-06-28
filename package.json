@@ -11,6 +11,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.0.2",
     "@chakra-ui/react": "^2.2.1",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
@@ -20,6 +21,7 @@
     "react-dom": "18.2.0"
   },
   "devDependencies": {
+    "@svgr/webpack": "^6.2.1",
     "@trivago/prettier-plugin-sort-imports": "^3.2.0",
     "@types/node": "18.0.0",
     "@types/react": "18.0.14",

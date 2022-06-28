@@ -1,15 +1,27 @@
+import type { ComponentType } from 'react';
+
+import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 
 import { ChakraProvider } from '@chakra-ui/react';
 
 import { Layout } from '../components/Layout';
 
-function MyApp({ Component, pageProps }: AppProps) {
+export type NextPageWithLayout = NextPage & {
+  getLayout?: ComponentType<any>;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+  const LayoutComponent = Component.getLayout || Layout;
   return (
     <ChakraProvider>
-      <Layout>
+      <LayoutComponent>
         <Component {...pageProps} />
-      </Layout>
+      </LayoutComponent>
     </ChakraProvider>
   );
 }
