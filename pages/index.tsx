@@ -8,6 +8,7 @@ import field from '../assets/field.jpg';
 import hands from '../assets/hands.jpg';
 import ECalmLogoWhite from '../assets/icons/e-calm-logo-white.svg';
 import TridentIcon from '../assets/icons/trident.svg';
+import { FAQ } from '../components/FAQ';
 
 type Contact = {
   title: string;
@@ -79,7 +80,7 @@ const Home: NextPage = () => {
   const { t } = useTranslation('common');
 
   return (
-    <div>
+    <Box>
       <Box
         backgroundImage={`url(${hands.src})`}
         backgroundRepeat="no-repeat"
@@ -216,7 +217,8 @@ const Home: NextPage = () => {
           </Button>
         </Flex>
       </Box>
-    </div>
+      <FAQ />
+    </Box>
   );
 };
 
