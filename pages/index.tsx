@@ -15,48 +15,6 @@ type Contact = {
   phones: string[];
 };
 
-const contactsLeft: Contact[] = [
-  {
-    title: 'Тяжкі розлади у дітей та дорослих',
-    subTitle:
-      'Анонімна пітримка і поради щодо проблем в особистих стосунках, булінгу, непорозумінь з батьками, насильства чи жорсткого поводження.',
-    phones: ['+38 (067) 594 94 46', '+38 (067) 594 94 46'],
-  },
-  {
-    title: 'Національна лінія підтримки для дітей',
-    subTitle:
-      'Анонімна пітримка і поради щодо проблем в особистих стосунках, булінгу, непорозумінь з батьками, насильства чи жорсткого поводження.',
-    phones: ['0 (800) 500 225', '116 111'],
-  },
-  {
-    title: 'Національна дітяча гаряча лінія',
-    phones: ['0 (800) 500 225'],
-  },
-  {
-    title: 'Лінія психологічної допомоги для учасників АТО і членів їх сімей',
-    phones: ['0 (800) 505 085'],
-  },
-];
-
-const contactsRight: Contact[] = [
-  {
-    title: 'Домашнє насильство та гендерна дискримінація',
-    subTitle:
-      'Національна гаряча лінія із запобігання домашнім насильствам, торгівлі людьми та гендерної дискримінації.',
-    phones: ['0 (800) 500 335', '116 123'],
-  },
-  {
-    title: 'Національна лінія запобігання суїцидам 24/7',
-    subTitle:
-      'Національна професійна цілодобова лінія з питань запобігання самогубств та профілактики психічного здоров’я «Lifeline Ukraine».',
-    phones: ['7333'],
-  },
-  {
-    title: 'Екстренна психологічна допомога при кризових центрах медико-психологічної допомоги',
-    phones: ['+ 38 (068) 770 37 70', '+ 38 (099) 632 18 18', '+ 38 (093) 609 30 03'],
-  },
-];
-
 const ContactItem = ({ title, subTitle, phones }: Contact) => (
   <Box key={title}>
     <Heading as="h3" mb={4} flex={1} size="md">
@@ -167,7 +125,7 @@ const Home: NextPage = () => {
             gap={8}
             flexDirection="column"
           >
-            {contactsLeft.map((contact, index) => (
+            {(t('contacts.left', { returnObjects: true }) as Contact[]).map((contact) => (
               <ContactItem {...contact} key={contact.title} />
             ))}
           </Flex>
@@ -180,7 +138,7 @@ const Home: NextPage = () => {
             gap={8}
             flexDirection="column"
           >
-            {contactsRight.map((contact, index) => (
+            {(t('contacts.right', { returnObjects: true }) as Contact[]).map((contact) => (
               <ContactItem {...contact} key={contact.title} />
             ))}
           </Flex>
