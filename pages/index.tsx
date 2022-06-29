@@ -1,6 +1,6 @@
 import type { GetStaticProps, NextPage } from 'next';
 
-import { Box, Button, Flex, Heading, Link, Text } from '@chakra-ui/react';
+import { Box, Button, Container, Flex, Heading, Link, Text } from '@chakra-ui/react';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
@@ -44,106 +44,112 @@ const Home: NextPage = () => {
         backgroundRepeat="no-repeat"
         backgroundSize="cover"
         backgroundPosition="center"
-        px={{ base: 4, md: 28 }}
-        py={{ base: 20, md: 28 }}
         color="white"
       >
-        <Heading as="h2" maxW="600px" size={{ base: 'md', md: 'xl' }}>
-          {t('formsSection.title')}
-        </Heading>
-        <Flex gap={{ base: 4, md: 6 }} mt={12} flexWrap="wrap">
-          <Button color="black" size={{ base: 'md', md: 'lg' }}>
-            {t('formsSection.getHelp')}
-          </Button>
-          <Button variant="outline" size={{ base: 'md', md: 'lg' }}>
-            {t('formsSection.becomePsychologist')}
-          </Button>
-        </Flex>
-      </Box>
-
-      <Box px={{ base: 4, md: 12 }} py={{ base: 16, md: 16 }} bg="#F6F6FA">
-        <Flex direction={{ base: 'column', md: 'row' }} mb={12} gap={8}>
-          <Heading as="h2" flex={1}>
-            {t('justBetweenUsSection.title')}
+        <Container size="md" py={{ base: 20, md: 28 }}>
+          <Heading as="h2" maxW="800px" size={{ base: 'md', md: '2xl' }}>
+            {t('formsSection.title')}
           </Heading>
-          <Box flex={1}>
-            <Text mb={4}>{t('justBetweenUsSection.subTitle')}</Text>
-            <Text>
-              {t('justBetweenUsSection.additional')}{' '}
-              <Link href="#contacts" textDecoration="underline">
-                {t('justBetweenUsSection.additionalLink')}
-              </Link>
-            </Text>
-          </Box>
-        </Flex>
-        <Flex direction={{ base: 'column', md: 'row' }} gap={8}>
-          <Box
-            flex={1}
-            borderRadius="20px"
-            bg="rgba(255, 255, 255, 0.41)"
-            sx={{ backdropFilter: 'blur(80px)' }}
-            px={{ base: 4, md: 8 }}
-            py={{ base: 8, md: 12 }}
-          >
-            <Heading as="h3" mb={8} flex={1} size="md">
-              {t('justBetweenUsSection.phone.title')}
-            </Heading>
-            <Text mb={4}>{t('justBetweenUsSection.phone.subTitle')}</Text>
-            <Button size={{ base: 'md', md: 'lg' }}>{t('justBetweenUsSection.phone.button')}</Button>
-          </Box>
-          <Box
-            flex={1}
-            borderRadius="20px"
-            bg="rgba(255, 255, 255, 0.41)"
-            sx={{ backdropFilter: 'blur(80px)' }}
-            px={{ base: 4, md: 8 }}
-            py={{ base: 8, md: 12 }}
-          >
-            <Heading as="h3" mb={8} flex={1} size="md">
-              {t('justBetweenUsSection.chat.title')}
-            </Heading>
-            <Text mb={4}>{t('justBetweenUsSection.chat.subTitle')}</Text>
-            <Button size={{ base: 'md', md: 'lg' }}>{t('justBetweenUsSection.chat.button')}</Button>
-          </Box>
-        </Flex>
+          <Flex gap={{ base: 4, md: 6 }} mt={12} flexWrap="wrap">
+            <Button color="black" size={{ base: 'md', md: 'lg' }}>
+              {t('formsSection.getHelp')}
+            </Button>
+            <Button variant="outline" size={{ base: 'md', md: 'lg' }}>
+              {t('formsSection.becomePsychologist')}
+            </Button>
+          </Flex>
+        </Container>
       </Box>
 
-      <Box px={{ base: 4, md: 12 }} py={{ base: 16, md: 16 }}>
-        <Heading as="h2">Статті психологів</Heading>
+      <Box bg="#F6F6FA">
+        <Container py={{ base: 16, md: 16 }}>
+          <Flex direction={{ base: 'column', md: 'row' }} mb={12} gap={8}>
+            <Heading as="h2" flex={1} size={{ base: 'md', md: '2xl' }}>
+              {t('justBetweenUsSection.title')}
+            </Heading>
+            <Box flex={1}>
+              <Text mb={4}>{t('justBetweenUsSection.subTitle')}</Text>
+              <Text>
+                {t('justBetweenUsSection.additional')}{' '}
+                <Link href="#contacts" textDecoration="underline">
+                  {t('justBetweenUsSection.additionalLink')}
+                </Link>
+              </Text>
+            </Box>
+          </Flex>
+          <Flex direction={{ base: 'column', md: 'row' }} gap={8}>
+            <Box
+              flex={1}
+              borderRadius="20px"
+              bg="rgba(255, 255, 255, 0.41)"
+              sx={{ backdropFilter: 'blur(80px)' }}
+              px={{ base: 4, md: 8 }}
+              py={{ base: 8, md: 12 }}
+            >
+              <Heading as="h3" mb={8} flex={1} size="md">
+                {t('justBetweenUsSection.phone.title')}
+              </Heading>
+              <Text mb={4}>{t('justBetweenUsSection.phone.subTitle')}</Text>
+              <Button size={{ base: 'md', md: 'lg' }}>{t('justBetweenUsSection.phone.button')}</Button>
+            </Box>
+            <Box
+              flex={1}
+              borderRadius="20px"
+              bg="rgba(255, 255, 255, 0.41)"
+              sx={{ backdropFilter: 'blur(80px)' }}
+              px={{ base: 4, md: 8 }}
+              py={{ base: 8, md: 12 }}
+            >
+              <Heading as="h3" mb={8} flex={1} size="md">
+                {t('justBetweenUsSection.chat.title')}
+              </Heading>
+              <Text mb={4}>{t('justBetweenUsSection.chat.subTitle')}</Text>
+              <Button size={{ base: 'md', md: 'lg' }}>{t('justBetweenUsSection.chat.button')}</Button>
+            </Box>
+          </Flex>
+        </Container>
       </Box>
 
-      <Box px={{ base: 4, md: 12 }} py={{ base: 16, md: 16 }} bg="#F6F6FA">
-        <Heading as="h2" mb={12}>
-          {t('contacts.title')}
+      <Container py={{ base: 16, md: 16 }}>
+        <Heading as="h2" size={{ base: 'md', md: '2xl' }}>
+          Статті психологів
         </Heading>
-        <Flex direction={{ base: 'column', md: 'row' }} gap={8}>
-          <Flex
-            flex={1}
-            borderRadius="20px"
-            bg="rgba(255, 255, 255, 0.41)"
-            px={{ base: 4, md: 8 }}
-            py={{ base: 8, md: 12 }}
-            gap={8}
-            flexDirection="column"
-          >
-            {(t('contacts.left', { returnObjects: true }) as Contact[]).map((contact) => (
-              <ContactItem {...contact} key={contact.title} />
-            ))}
+      </Container>
+
+      <Box bg="#F6F6FA">
+        <Container py={{ base: 16, md: 16 }}>
+          <Heading as="h2" mb={12} size={{ base: 'md', md: '2xl' }}>
+            {t('contacts.title')}
+          </Heading>
+          <Flex direction={{ base: 'column', md: 'row' }} gap={8}>
+            <Flex
+              flex={1}
+              borderRadius="20px"
+              bg="rgba(255, 255, 255, 0.41)"
+              px={{ base: 4, md: 8 }}
+              py={{ base: 8, md: 12 }}
+              gap={8}
+              flexDirection="column"
+            >
+              {(t('contacts.left', { returnObjects: true }) as Contact[]).map((contact) => (
+                <ContactItem {...contact} key={contact.title} />
+              ))}
+            </Flex>
+            <Flex
+              flex={1}
+              borderRadius="20px"
+              bg="rgba(255, 255, 255, 0.41)"
+              px={{ base: 4, md: 8 }}
+              py={{ base: 8, md: 12 }}
+              gap={8}
+              flexDirection="column"
+            >
+              {(t('contacts.right', { returnObjects: true }) as Contact[]).map((contact) => (
+                <ContactItem {...contact} key={contact.title} />
+              ))}
+            </Flex>
           </Flex>
-          <Flex
-            flex={1}
-            borderRadius="20px"
-            bg="rgba(255, 255, 255, 0.41)"
-            px={{ base: 4, md: 8 }}
-            py={{ base: 8, md: 12 }}
-            gap={8}
-            flexDirection="column"
-          >
-            {(t('contacts.right', { returnObjects: true }) as Contact[]).map((contact) => (
-              <ContactItem {...contact} key={contact.title} />
-            ))}
-          </Flex>
-        </Flex>
+        </Container>
       </Box>
 
       <Box
@@ -151,30 +157,31 @@ const Home: NextPage = () => {
         backgroundRepeat="no-repeat"
         backgroundSize="cover"
         backgroundPosition="center"
-        px={{ base: 4, md: 28 }}
-        py={{ base: 12, md: 28 }}
         color="white"
       >
-        <Flex gap={8} mb={12} display={{ base: 'none', md: 'flex' }}>
-          <Box flex="none" width="80px">
-            <ECalmLogoWhite />
-          </Box>
-          <Box flex="none" width="80px">
-            <TridentIcon />
-          </Box>
-        </Flex>
-        <Heading as="h2" size={{ base: 'md', md: 'xl' }}>
-          {t('formsSection.secondTitle')}
-        </Heading>
-        <Flex gap={{ base: 4, md: 6 }} mt={{ base: 8, md: 12 }} flexWrap="wrap">
-          <Button color="black" size={{ base: 'md', md: 'lg' }}>
-            {t('formsSection.getHelp')}
-          </Button>
-          <Button variant="outline" size={{ base: 'md', md: 'lg' }}>
-            {t('formsSection.becomePsychologist')}
-          </Button>
-        </Flex>
+        <Container py={{ base: 12, md: 28 }}>
+          <Flex gap={8} mb={12} display={{ base: 'none', md: 'flex' }}>
+            <Box flex="none" width="80px">
+              <ECalmLogoWhite />
+            </Box>
+            <Box flex="none" width="80px">
+              <TridentIcon />
+            </Box>
+          </Flex>
+          <Heading as="h2" size={{ base: 'md', md: '2xl' }}>
+            {t('formsSection.secondTitle')}
+          </Heading>
+          <Flex gap={{ base: 4, md: 6 }} mt={{ base: 8, md: 12 }} flexWrap="wrap">
+            <Button color="black" size={{ base: 'md', md: 'lg' }}>
+              {t('formsSection.getHelp')}
+            </Button>
+            <Button variant="outline" size={{ base: 'md', md: 'lg' }}>
+              {t('formsSection.becomePsychologist')}
+            </Button>
+          </Flex>
+        </Container>
       </Box>
+
       <FAQ />
     </Box>
   );

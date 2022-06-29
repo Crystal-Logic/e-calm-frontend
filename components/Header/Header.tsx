@@ -114,6 +114,7 @@ export const Header = () => {
           <Heading as="h1" size={{ xs: 'md', md: 'lg', lg: 'xl' }}>
             {t('header.title')}
           </Heading>
+          {/* TODO: use heading */}
           <Text fontSize={{ xs: 'md', md: 'lg', lg: 'xl' }}>{t('header.subTitle')}</Text>
         </Box>
         <Flex ml={{ md: 'auto' }}>

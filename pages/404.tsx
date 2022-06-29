@@ -20,8 +20,8 @@ export default function FourOhFour() {
       flexDirection="column"
       justifyContent="center"
     >
-      <Container>
-        <Flex gap={4}>
+      <Container size="md">
+        <Flex mb={20} gap={4}>
           <Box w="80px">
             <TridentIcon />
           </Box>
@@ -29,13 +29,15 @@ export default function FourOhFour() {
             <ECalmLogo />
           </Box>
         </Flex>
-        <Heading as="h1" fontSize="100">
+        <Heading as="h1" mb={10} size="4xl">
           404
         </Heading>
-        <Heading as="h2">{t('404.title')}</Heading>
-        <Text>{t('404.subTitle')}</Text>
+        <Heading mb={2} as="h2" size="2xl">
+          {t('404.title')}
+        </Heading>
+        <Text mb={20}>{t('404.subTitle')}</Text>
         <Link href="/" passHref>
-          <Button as="a" href="/" size="lg" mt={8}>
+          <Button as="a" href="/" size="lg">
             {t('404.button')}
           </Button>
         </Link>
