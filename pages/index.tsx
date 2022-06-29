@@ -18,18 +18,20 @@ type Contact = {
 
 const ContactItem = ({ title, subTitle, phones }: Contact) => (
   <Box key={title}>
-    <Heading as="h3" mb={4} flex={1} size="md">
+    <Heading as="h3" maxWidth={400} mb={5} flex={1} size={{ base: 'sm', md: 'lg' }}>
       {title}
     </Heading>
     {subTitle && (
-      <Text mt={4} mb={4}>
+      <Text size={{ base: 'md', md: 'lg' }} mb={5}>
         {subTitle}
       </Text>
     )}
-    {phones.map((phone) => (
-      <Box key={phone}>
-        <Link href={`tel:${phone}`}>{phone}</Link>
-      </Box>
+    {phones.map((phone, index) => (
+      <Link display="block" mb={2} key={index} href={`tel:${phone}`}>
+        <Heading as="span" size={{ base: 'xs', md: 'sm' }}>
+          {phone}
+        </Heading>
+      </Link>
     ))}
   </Box>
 );
@@ -128,7 +130,7 @@ const Home: NextPage = () => {
               bg="rgba(255, 255, 255, 0.41)"
               px={{ base: 4, md: 8 }}
               py={{ base: 8, md: 12 }}
-              gap={8}
+              gap={{ base: 8, md: 16 }}
               flexDirection="column"
             >
               {(t('contacts.left', { returnObjects: true }) as Contact[]).map((contact) => (
@@ -141,7 +143,7 @@ const Home: NextPage = () => {
               bg="rgba(255, 255, 255, 0.41)"
               px={{ base: 4, md: 8 }}
               py={{ base: 8, md: 12 }}
-              gap={8}
+              gap={{ base: 8, md: 16 }}
               flexDirection="column"
             >
               {(t('contacts.right', { returnObjects: true }) as Contact[]).map((contact) => (
