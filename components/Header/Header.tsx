@@ -15,7 +15,6 @@ import {
   HStack,
   Heading,
   IconButton,
-  Link,
   Text,
   VStack,
   useBoolean,
@@ -24,23 +23,8 @@ import { useTranslation } from 'next-i18next';
 
 import ECalmLogo from '../../assets/icons/e-calm-logo.svg';
 import TridentIcon from '../../assets/icons/trident.svg';
-
-const Links = [
-  { title: 'Корисні статті', url: '/useful-articles' },
-  { title: 'Точки зору', url: '/pov' },
-  { title: 'Особистий досвід', url: '/experience' },
-  { title: 'Тестування на психологічний стан', url: '/testing' },
-  { title: 'Контакти', url: '/#contacts' },
-  { title: 'Питання та відповіді', url: '/#faq' },
-];
-
-const NavLink = ({ title, url, onClick }: { title: string; url: string; onClick?: () => void }) => (
-  <Link as="span" onClick={onClick}>
-    <NextLink passHref href={url}>
-      {title}
-    </NextLink>
-  </Link>
-);
+import { NavLinks } from '../../utils/navLinks';
+import { NavLink } from '../NavLink';
 
 const localesTitles: Record<string, string> = {
   ua: 'УКР',
@@ -140,7 +124,7 @@ export const Header = () => {
 
         <Box display={{ base: 'none', md: 'flex' }}>
           <HStack as={'nav'} spacing={6} mb={8}>
-            {Links.map((link) => (
+            {NavLinks.map((link) => (
               <NavLink key={link.url} url={link.url} title={link.title} />
             ))}
           </HStack>
@@ -164,7 +148,7 @@ export const Header = () => {
             <DrawerCloseButton size="lg" />
           </DrawerHeader>
           <VStack as="nav" spacing={2} alignItems="flex-start" mt={8} pl={3}>
-            {Links.map((link) => (
+            {NavLinks.map((link) => (
               <NavLink key={link.url} url={link.url} title={link.title} onClick={setIsOpened.off} />
             ))}
           </VStack>
