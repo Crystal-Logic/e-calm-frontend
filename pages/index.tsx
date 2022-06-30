@@ -28,10 +28,10 @@ const Home: NextPage = () => {
             {t('formsSection.title')}
           </Heading>
           <Flex gap={{ base: 4, md: 6 }} mt={12} flexWrap="wrap">
-            <Button color="black" size={{ base: 'md', md: 'lg' }}>
+            <Button variant="solidWhite" size={{ base: 'md', md: 'lg' }}>
               {t('formsSection.getHelp')}
             </Button>
-            <Button variant="outline" size={{ base: 'md', md: 'lg' }}>
+            <Button variant="outlineWhite" size={{ base: 'md', md: 'lg' }}>
               {t('formsSection.becomePsychologist')}
             </Button>
           </Flex>
@@ -115,10 +115,10 @@ const Home: NextPage = () => {
             {t('formsSection.secondTitle')}
           </Heading>
           <Flex gap={{ base: 4, md: 6 }} mt={{ base: 8, md: 12 }} flexWrap="wrap">
-            <Button color="black" size={{ base: 'md', md: 'lg' }}>
+            <Button variant="solidWhite" size={{ base: 'md', md: 'lg' }}>
               {t('formsSection.getHelp')}
             </Button>
-            <Button variant="outline" size={{ base: 'md', md: 'lg' }}>
+            <Button variant="outlineWhite" size={{ base: 'md', md: 'lg' }}>
               {t('formsSection.becomePsychologist')}
             </Button>
           </Flex>

@@ -37,7 +37,7 @@ export default function FourOhFour() {
         </Heading>
         <Text mb={20}>{t('404.subTitle')}</Text>
         <Link href="/" passHref>
-          <Button as="a" href="/" size="lg">
+          <Button as="a" href="/">
             {t('404.button')}
           </Button>
         </Link>

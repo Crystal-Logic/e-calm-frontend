@@ -14,7 +14,7 @@ export const Footer = () => {
   const { t } = useTranslation('common');
 
   return (
-    <Box bg="black" color="white">
+    <Box bg="brand.black" color="brand.white">
       <Container py={{ base: 8, md: 16 }}>
         <Flex direction={{ base: 'column', md: 'row' }} gap={8}>
           <Box flex={1}>
