@@ -14,6 +14,13 @@ const fonts = {
 };
 
 export const theme = extendTheme({
+  styles: {
+    global: {
+      html: {
+        scrollBehavior: 'smooth',
+      },
+    },
+  },
   fonts,
   components: {
     Container,
