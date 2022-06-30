@@ -46,7 +46,7 @@ export const FAQ: NextPage = () => {
   const { t } = useTranslation('faq');
 
   return (
-    <Container>
+    <Container id="faq">
       <Box py={{ base: 12, md: 16 }}>
         <Heading mb={{ base: 8, md: 12 }} as="h2" size={{ base: 'md', md: '2xl' }}>
           {t('title')}

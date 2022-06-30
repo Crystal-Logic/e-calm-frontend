@@ -37,6 +37,10 @@ export const Heading: ComponentStyleConfig = {
       fontSize: '16px',
       lineHeight: 1.5,
     },
+    xxs: {
+      fontSize: '13px',
+      lineHeight: 1.5,
+    },
   },
   defaultProps: {
     size: '2xl',
