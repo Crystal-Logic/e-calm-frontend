@@ -10,6 +10,7 @@ import ECalmLogoWhite from '../assets/icons/e-calm-logo-white.svg';
 import TridentIcon from '../assets/icons/trident.svg';
 import { Contacts } from '../components/Contacts';
 import { FAQ } from '../components/FAQ';
+import { FormModalRef, FormModalState } from '../components/FormModal';
 
 const Home: NextPage = () => {
   const { t } = useTranslation('common');
@@ -28,10 +29,18 @@ const Home: NextPage = () => {
             {t('formsSection.title')}
           </Heading>
           <Flex gap={{ base: 4, md: 6 }} mt={12} flexWrap="wrap">
-            <Button variant="solidWhite" size={{ base: 'md', md: 'lg' }}>
+            <Button
+              variant="solidWhite"
+              size={{ base: 'md', md: 'lg' }}
+              onClick={() => FormModalRef.current?.set(FormModalState.patient)}
+            >
               {t('formsSection.getHelp')}
             </Button>
-            <Button variant="outlineWhite" size={{ base: 'md', md: 'lg' }}>
+            <Button
+              variant="outlineWhite"
+              size={{ base: 'md', md: 'lg' }}
+              onClick={() => FormModalRef.current?.set(FormModalState.psychologist)}
+            >
               {t('formsSection.becomePsychologist')}
             </Button>
           </Flex>
@@ -115,10 +124,18 @@ const Home: NextPage = () => {
             {t('formsSection.secondTitle')}
           </Heading>
           <Flex gap={{ base: 4, md: 6 }} mt={{ base: 8, md: 12 }} flexWrap="wrap">
-            <Button variant="solidWhite" size={{ base: 'md', md: 'lg' }}>
+            <Button
+              variant="solidWhite"
+              size={{ base: 'md', md: 'lg' }}
+              onClick={() => FormModalRef.current?.set(FormModalState.patient)}
+            >
               {t('formsSection.getHelp')}
             </Button>
-            <Button variant="outlineWhite" size={{ base: 'md', md: 'lg' }}>
+            <Button
+              variant="outlineWhite"
+              size={{ base: 'md', md: 'lg' }}
+              onClick={() => FormModalRef.current?.set(FormModalState.psychologist)}
+            >
               {t('formsSection.becomePsychologist')}
             </Button>
           </Flex>
