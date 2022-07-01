@@ -33,12 +33,15 @@ const localesTitles: Record<string, string> = {
 
 const LanguageSwitcher = () => {
   const { locale, locales, asPath } = useRouter();
+
   return (
     <Flex gap={1} mr={2}>
       {locales!.map((l, i, arr) => (
         <Fragment key={l}>
           <NextLink href={asPath} locale={l}>
-            <Text color={locale === l ? 'black' : 'gray.500'}>{localesTitles[l]}</Text>
+            <Text cursor="pointer" color={locale === l ? 'brand.black' : 'brand.grey'}>
+              {localesTitles[l]}
+            </Text>
           </NextLink>
           {i !== arr.length - 1 && <Text>-</Text>}
         </Fragment>
@@ -78,6 +81,7 @@ export const Header = () => {
           gap={{ base: 3, md: 8 }}
           wrap={{ base: 'wrap', md: 'nowrap' }}
           mb={{ base: 6, md: 24 }}
+          alignItems="flex-start"
         >
           <Box
             position="absolute"
@@ -112,7 +116,7 @@ export const Header = () => {
               {t('header.subTitle')}
             </Heading>
           </Box>
-          <Flex ml={{ md: 'auto' }}>
+          <Flex alignItems="flex-start" ml={{ md: 'auto' }}>
             <Box display={{ base: 'none', md: 'flex' }} mr={8}>
               <LanguageSwitcher />
             </Box>
