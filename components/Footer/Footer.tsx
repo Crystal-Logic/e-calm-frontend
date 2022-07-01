@@ -8,6 +8,7 @@ import TelegramIcon from '../../assets/icons/telegram.svg';
 import TridentIcon from '../../assets/icons/trident.svg';
 import TwitterIcon from '../../assets/icons/twitter.svg';
 import { NavLinks } from '../../utils/navLinks';
+import { ContactForm, ContactFormType } from '../ContactForm';
 import { NavLink } from '../NavLink';
 
 export const Footer = () => {
@@ -18,8 +19,12 @@ export const Footer = () => {
       <Container py={{ base: 8, md: 16 }}>
         <Flex direction={{ base: 'column', md: 'row' }} gap={8}>
           <Box flex={1}>
-            <Heading size="sm">Звернутись за допомогою</Heading>
-            <div>form here</div>
+            <Heading size="sm" mb={4}>
+              {t('footer.formTitle')}
+            </Heading>
+            <Box maxW="420">
+              <ContactForm type={ContactFormType.patient} btnVariant="solidWhite" />
+            </Box>
           </Box>
           <Divider display={{ base: 'block', md: 'none' }} />
           <Box flex={1}>
