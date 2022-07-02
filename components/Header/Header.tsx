@@ -14,7 +14,9 @@ import {
   Flex,
   HStack,
   Heading,
+  Hide,
   IconButton,
+  Show,
   Text,
   VStack,
   useBoolean,
@@ -23,7 +25,7 @@ import { useTranslation } from 'next-i18next';
 
 import ECalmLogo from '../../assets/icons/e-calm-logo.svg';
 import TridentIcon from '../../assets/icons/trident.svg';
-import { NavLinks } from '../../utils/navLinks';
+import { navLinks } from '../../types';
 import { NavLink } from '../NavLink';
 
 const localesTitles: Record<string, string> = {
@@ -54,27 +56,23 @@ export const Header = () => {
   const [isOpened, setIsOpened] = useBoolean();
 
   const { t } = useTranslation('common');
+  const navLinksTitles = t('navigation', { returnObjects: true }) as Record<typeof navLinks[number], string>;
 
   return (
     <Box position="relative" overflow="hidden">
       <Container>
-        <Box
-          display={{ base: 'flex', md: 'none' }}
-          alignItems="center"
-          justifyContent="flex-end"
-          py={2}
-          mr={-2}
-          mb={10}
-        >
-          <LanguageSwitcher />
-          <IconButton
-            onClick={setIsOpened.toggle}
-            aria-label="open menu"
-            variant="ghost"
-            size="lg"
-            icon={<HamburgerIcon />}
-          />
-        </Box>
+        <Hide above="md">
+          <Flex alignItems="center" justifyContent="flex-end" py={2} mr={-2} mb={10}>
+            <LanguageSwitcher />
+            <IconButton
+              onClick={setIsOpened.toggle}
+              aria-label="open menu"
+              variant="unstyled"
+              size="lg"
+              icon={<HamburgerIcon />}
+            />
+          </Flex>
+        </Hide>
 
         <Flex
           py={{ base: 0, md: 10 }}
@@ -105,9 +103,11 @@ export const Header = () => {
             sx={{ filter: 'blur(clamp(100px, 20vw, 200px))' }}
             zIndex={-1}
           />
-          <Box flex="none" width={{ base: '64px', md: '80px' }}>
-            <ECalmLogo />
-          </Box>
+          <NextLink href="/" passHref>
+            <Box flex="none" width={{ base: '64px', md: '80px' }} cursor="pointer">
+              <ECalmLogo />
+            </Box>
+          </NextLink>
           <Box order={{ base: '1', md: '0' }} maxW="600px">
             <Heading mb={4} as="h1" size={{ base: 'md', md: '2xl' }}>
               {t('header.title')}
@@ -117,22 +117,24 @@ export const Header = () => {
             </Heading>
           </Box>
           <Flex alignItems="flex-start" ml={{ md: 'auto' }}>
-            <Box display={{ base: 'none', md: 'flex' }} mr={8}>
-              <LanguageSwitcher />
-            </Box>
+            <Hide below="md">
+              <Box mr={8}>
+                <LanguageSwitcher />
+              </Box>
+            </Hide>
             <Box flex="none" width={{ base: '64px', md: '80px' }}>
               <TridentIcon />
             </Box>
           </Flex>
         </Flex>
 
-        <Box display={{ base: 'none', md: 'flex' }}>
+        <Hide below="md">
           <HStack as={'nav'} spacing={6} mb={8}>
-            {NavLinks.map((link) => (
-              <NavLink key={link.url} url={link.url} title={link.title} />
+            {navLinks.map((link) => (
+              <NavLink key={link} url={link} title={navLinksTitles[link]} />
             ))}
           </HStack>
-        </Box>
+        </Hide>
       </Container>
 
       <Drawer isOpen={isOpened} placement="right" onClose={setIsOpened.off} size="full">
@@ -146,14 +148,16 @@ export const Header = () => {
             borderBottom="2px"
             borderBottomColor="#F6F6FA"
           >
-            <Box w="32px">
-              <ECalmLogo />
-            </Box>
+            <NextLink href="/" passHref>
+              <Box w="32px" cursor="pointer" onClick={setIsOpened.off}>
+                <ECalmLogo />
+              </Box>
+            </NextLink>
             <DrawerCloseButton size="lg" />
           </DrawerHeader>
           <VStack as="nav" spacing={2} alignItems="flex-start" mt={8} pl={3}>
-            {NavLinks.map((link) => (
-              <NavLink key={link.url} url={link.url} title={link.title} onClick={setIsOpened.off} />
+            {navLinks.map((link) => (
+              <NavLink key={link} url={link} title={navLinksTitles[link]} onClick={setIsOpened.off} />
             ))}
           </VStack>
         </DrawerContent>

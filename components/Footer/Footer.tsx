@@ -1,4 +1,4 @@
-import { Box, Container, Divider, Flex, Heading, Text, VStack } from '@chakra-ui/react';
+import { Box, Container, Divider, Flex, Heading, Hide, Text, VStack } from '@chakra-ui/react';
 import { useTranslation } from 'next-i18next';
 
 import ECalmLogoWhite from '../../assets/icons/e-calm-logo-white.svg';
@@ -7,12 +7,13 @@ import InstagramIcon from '../../assets/icons/instagram.svg';
 import TelegramIcon from '../../assets/icons/telegram.svg';
 import TridentIcon from '../../assets/icons/trident.svg';
 import TwitterIcon from '../../assets/icons/twitter.svg';
-import { NavLinks } from '../../utils/navLinks';
+import { navLinks } from '../../types';
 import { ContactForm, ContactFormType } from '../ContactForm';
 import { NavLink } from '../NavLink';
 
 export const Footer = () => {
   const { t } = useTranslation('common');
+  const navLinksTitles = t('navigation', { returnObjects: true }) as Record<typeof navLinks[number], string>;
 
   return (
     <Box bg="brand.black" color="brand.white">
@@ -26,12 +27,14 @@ export const Footer = () => {
               <ContactForm type={ContactFormType.patient} btnVariant="solidWhite" />
             </Box>
           </Box>
-          <Divider display={{ base: 'block', md: 'none' }} />
+          <Hide above="md">
+            <Divider />
+          </Hide>
           <Box flex={1}>
             <Heading size="sm">{t('footer.linksTitle')}</Heading>
             <VStack as="nav" spacing={2} alignItems="flex-start" mt={8}>
-              {NavLinks.map((link) => (
-                <NavLink key={link.url} url={link.url} title={link.title} />
+              {navLinks.map((link) => (
+                <NavLink key={link} url={link} title={navLinksTitles[link]} />
               ))}
             </VStack>
           </Box>
