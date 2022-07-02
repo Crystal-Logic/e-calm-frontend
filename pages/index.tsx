@@ -1,6 +1,6 @@
 import type { GetStaticProps, NextPage } from 'next';
 
-import { Box, Button, Container, Flex, Heading, Link, Text } from '@chakra-ui/react';
+import { Box, Button, Container, Flex, Heading, Hide, Link, Text } from '@chakra-ui/react';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
@@ -112,14 +112,16 @@ const Home: NextPage = () => {
         color="white"
       >
         <Container py={{ base: 12, md: 28 }}>
-          <Flex gap={8} mb={12} display={{ base: 'none', md: 'flex' }}>
-            <Box flex="none" width="80px">
-              <ECalmLogoWhite />
-            </Box>
-            <Box flex="none" width="80px">
-              <TridentIcon />
-            </Box>
-          </Flex>
+          <Hide below="md">
+            <Flex gap={8} mb={12}>
+              <Box flex="none" width="80px">
+                <ECalmLogoWhite />
+              </Box>
+              <Box flex="none" width="80px">
+                <TridentIcon />
+              </Box>
+            </Flex>
+          </Hide>
           <Heading as="h2" size={{ base: 'md', md: '2xl' }}>
             {t('formsSection.secondTitle')}
           </Heading>
