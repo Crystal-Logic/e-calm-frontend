@@ -115,13 +115,7 @@ export const ContactForm = ({ type, btnVariant = 'solidBlack' }: ContactFormProp
         <Input placeholder={formLocales.phone} variant="flushed" value={phone} onChange={handleChangePhone} />
         <FormErrorMessage>{phoneError}</FormErrorMessage>
       </FormControl>
-      <Checkbox
-        isChecked={checkbox}
-        onChange={handleChangeChecked}
-        isInvalid={!!checkboxError}
-        color={checkboxError ? 'red.500' : 'inherit'}
-        isRequired
-      >
+      <Checkbox isChecked={checkbox} onChange={handleChangeChecked} isInvalid={!!checkboxError} isRequired>
         {formLocales.checkbox}
       </Checkbox>
       <Button size={{ base: 'md', md: 'lg' }} onClick={handleSubmit} variant={btnVariant}>

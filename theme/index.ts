@@ -2,6 +2,7 @@ import { extendTheme } from '@chakra-ui/react';
 
 import { brand } from './colors';
 import { Button } from './components/Button';
+import { Checkbox } from './components/Checkbox';
 import { Container } from './components/Container';
 import { Heading } from './components/Heading';
 import { Text } from './components/Text';
@@ -26,6 +27,7 @@ export const theme = extendTheme({
     body: font,
   },
   components: {
+    Checkbox,
     Button,
     Container,
     Heading,
