@@ -36,7 +36,7 @@ export const Footer = () => {
             </VStack>
           </Box>
         </Flex>
-        <Divider my={8} />
+        <Divider mt={16} mb={8} />
         <Flex direction={{ base: 'column-reverse', md: 'row' }} gap={8}>
           <Box flex={1}>
             <Flex gap={4} alignItems="center">
