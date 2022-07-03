@@ -14,7 +14,7 @@ export const enum ContactFormType {
 
 type ContactFormProps = {
   type: ContactFormType;
-  btnVariant?: 'solidBlack' | 'solidWhite';
+  variant?: 'light' | 'dark';
 };
 
 type FormLocales = {
@@ -47,7 +47,7 @@ const formInitialState: FormType = {
   checkboxError: null,
 };
 
-export const ContactForm = ({ type, btnVariant = 'solidBlack' }: ContactFormProps) => {
+export const ContactForm = ({ type, variant = 'dark' }: ContactFormProps) => {
   const { t } = useTranslation('common');
   const formLocales = t('form', { returnObjects: true }) as FormLocales;
   const [{ name, phone, checkbox, nameError, phoneError, checkboxError }, setForm] = useState(formInitialState);
@@ -105,20 +105,38 @@ export const ContactForm = ({ type, btnVariant = 'solidBlack' }: ContactFormProp
     }
   };
 
+  const isLight = variant === 'light';
+
   return (
-    <VStack alignItems={{ base: 'center', md: 'flex-start' }} gap={4}>
+    <VStack alignItems={{ base: 'center', md: 'flex-start' }} gap={6}>
       <FormControl isInvalid={!!nameError} isRequired>
-        <Input placeholder={formLocales.name} variant="flushed" value={name} onChange={handleChangeName} />
+        <Input
+          variant={isLight ? 'flushedWhite' : 'flushedBlack'}
+          placeholder={formLocales.name}
+          value={name}
+          onChange={handleChangeName}
+        />
         <FormErrorMessage>{nameError}</FormErrorMessage>
       </FormControl>
       <FormControl isInvalid={!!phoneError} isRequired>
-        <Input placeholder={formLocales.phone} variant="flushed" value={phone} onChange={handleChangePhone} />
+        <Input
+          variant={isLight ? 'flushedWhite' : 'flushedBlack'}
+          placeholder={formLocales.phone}
+          value={phone}
+          onChange={handleChangePhone}
+        />
         <FormErrorMessage>{phoneError}</FormErrorMessage>
       </FormControl>
-      <Checkbox isChecked={checkbox} onChange={handleChangeChecked} isInvalid={!!checkboxError} isRequired>
+      <Checkbox
+        variant={isLight ? 'white' : 'black'}
+        isChecked={checkbox}
+        onChange={handleChangeChecked}
+        isInvalid={!!checkboxError}
+        isRequired
+      >
         {formLocales.checkbox}
       </Checkbox>
-      <Button size={{ base: 'md', md: 'lg' }} onClick={handleSubmit} variant={btnVariant}>
+      <Button size={{ base: 'md', md: 'lg' }} onClick={handleSubmit} variant={isLight ? 'solidWhite' : 'solidBlack'}>
         {formLocales.btn}
       </Button>
     </VStack>
