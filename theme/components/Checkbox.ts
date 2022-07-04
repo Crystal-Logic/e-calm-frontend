@@ -1,49 +1,48 @@
 export const Checkbox = {
   baseStyle: {
     control: {
-      borderRadius: '0',
-      _checked: {
+      borderRadius: 0,
+
+      _disabled: {
         bg: 'none',
-        borderColor: 'brand.white',
-        _hover: {
-          bg: 'none',
-          borderColor: 'brand.white',
-        },
+        color: 'brand.lightGrey',
+        borderColor: 'brand.lightGrey',
+      },
+
+      _checked: {
         _disabled: {
           bg: 'none',
           color: 'brand.lightGrey',
           borderColor: 'brand.lightGrey',
         },
       },
-      _invalid: {
-        bg: 'none',
-        borderColor: 'red.500',
-      },
     },
     label: {
       _invalid: {
         color: 'red.500',
+      },
+
+      _disabled: {
+        opacity: 1,
+        color: 'brand.lightGrey',
       },
     },
   },
   sizes: {
     md: {
       control: {
-        w: '20px',
-        h: '20px',
+        w: 5,
+        h: 5,
       },
       label: {
         fontSize: '11px',
         lineHeight: '14px',
       },
-      icon: {
-        fontSize: '0.65rem',
-      },
     },
     lg: {
       control: {
-        w: '24px',
-        h: '24px',
+        w: 6,
+        h: 6,
       },
       label: {
         fontSize: '13px',
@@ -54,7 +53,42 @@ export const Checkbox = {
       },
     },
   },
+  variants: {
+    white: {
+      control: {
+        borderColor: 'brand.white',
+
+        _checked: {
+          bg: 'none',
+          borderColor: 'brand.white',
+
+          _hover: {
+            bg: 'none',
+            borderColor: 'brand.white',
+          },
+        },
+      },
+    },
+    black: {
+      control: {
+        borderColor: 'brand.black',
+        color: 'brand.black',
+
+        _checked: {
+          color: 'brand.black',
+          bg: 'none',
+          borderColor: 'brand.black',
+
+          _hover: {
+            bg: 'none',
+            borderColor: 'brand.black',
+          },
+        },
+      },
+    },
+  },
   defaultProps: {
     size: 'lg',
+    variant: 'black',
   },
 };

@@ -2,8 +2,17 @@ import NextLink from 'next/link';
 
 import { Link } from '@chakra-ui/react';
 
-export const NavLink = ({ title, url, onClick }: { title: string; url: string; onClick?: () => void }) => (
+type NavLinkProps = {
+  color?: string;
+  title: string;
+  url: string;
+  onClick?: () => void;
+};
+
+export const NavLink = ({ title, url, onClick, color = 'inherit' }: NavLinkProps) => (
   <NextLink passHref href={url}>
-    <Link onClick={onClick}>{title}</Link>
+    <Link color={color} onClick={onClick}>
+      {title}
+    </Link>
   </NextLink>
 );

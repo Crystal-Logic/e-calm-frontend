@@ -24,7 +24,7 @@ export const Footer = () => {
               {t('footer.formTitle')}
             </Heading>
             <Box maxW="420">
-              <ContactForm type={ContactFormType.patient} btnVariant="solidWhite" />
+              <ContactForm type={ContactFormType.patient} variant="light" />
             </Box>
           </Box>
           <Hide above="md">
@@ -32,9 +32,9 @@ export const Footer = () => {
           </Hide>
           <Box flex={1}>
             <Heading size="sm">{t('footer.linksTitle')}</Heading>
-            <VStack as="nav" spacing={2} alignItems="flex-start" mt={8}>
+            <VStack as="nav" spacing={2.5} alignItems="flex-start" mt={8}>
               {navLinks.map((link) => (
-                <NavLink key={link} url={link} title={navLinksTitles[link]} />
+                <NavLink color="brand.lightGrey" key={link} url={link} title={navLinksTitles[link]} />
               ))}
             </VStack>
           </Box>
