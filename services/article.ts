@@ -25,7 +25,7 @@ export const ArticleService = {
 
     articles.forEach((article) => {
       article.categories.forEach((category) => {
-        articlesByCategory[category.slug].push(article);
+        articlesByCategory[category].push(article);
       });
     });
     return articlesByCategory;

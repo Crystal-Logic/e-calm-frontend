@@ -13,6 +13,9 @@ const nextConfig = {
 
     return config;
   },
+  images: {
+    domains: ['3.71.20.14.nip.io'],
+  },
 };
 
 module.exports = nextConfig;

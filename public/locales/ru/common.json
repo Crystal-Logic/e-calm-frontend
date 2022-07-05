@@ -103,7 +103,8 @@
     "btn": "Подтвердить"
   },
   "articles": {
-    "listTitle": "Статьи психологов"
+    "listTitle": "Статьи психологов",
+    "allArticles": "Все статьи"
   },
   "navigation": {
     "/useful-articles": "Полезные статьи",

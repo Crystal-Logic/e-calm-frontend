@@ -11,8 +11,16 @@ import TridentIcon from '../assets/icons/trident.svg';
 import { Contacts } from '../components/Contacts';
 import { FAQ } from '../components/FAQ';
 import { FormModalRef, FormModalState } from '../components/FormModal';
+import { HomeArticles } from '../components/HomeArticles';
+import { ArticleService } from '../services';
+import { ArticleCategory, ArticlesPreviewByCategory, articleCategories } from '../types';
 
-const Home: NextPage = () => {
+type HomeProps = {
+  categoriesInfo: Record<ArticleCategory, number>;
+  articles: ArticlesPreviewByCategory;
+};
+
+const Home: NextPage<HomeProps> = ({ categoriesInfo, articles }) => {
   const { t } = useTranslation('common');
 
   return (
@@ -96,11 +104,7 @@ const Home: NextPage = () => {
         </Container>
       </Box>
 
-      <Container py={{ base: 16, md: 16 }}>
-        <Heading as="h2" size={{ base: 'md', md: '2xl' }}>
-          Статті психологів
-        </Heading>
-      </Container>
+      <HomeArticles articles={articles} categoriesInfo={categoriesInfo} />
 
       <Contacts />
 
@@ -149,10 +153,20 @@ const Home: NextPage = () => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => ({
-  props: {
-    ...(await serverSideTranslations(locale!)),
-  },
-});
+export const getStaticProps: GetStaticProps<HomeProps> = async ({ locale }) => {
+  const articlesListByCategory = await ArticleService.getArticlesListByCategory();
+  const categoriesInfo = ArticleService.getCategoriesInfo(articlesListByCategory);
+
+  return {
+    props: {
+      articles: articleCategories.reduce(
+        (acc, category) => Object.assign(acc, { [category]: articlesListByCategory[category].slice(0, 3) }),
+        {} as ArticlesPreviewByCategory,
+      ),
+      categoriesInfo,
+      ...(await serverSideTranslations(locale!)),
+    },
+  };
+};
 
 export default Home;
