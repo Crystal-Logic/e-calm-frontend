@@ -21,17 +21,12 @@ export const navLinks = [
   '/#faq',
 ] as const;
 
-type Category = {
-  name: string;
-  slug: ArticleCategory;
-};
-
 export type Article = {
   id: never;
   image: string;
   title: string;
   body: string;
-  categories: Category[];
+  categories: ArticleCategory[];
 };
 
 export type ArticlePreview = Pick<Article, 'id' | 'image' | 'title' | 'categories'>;

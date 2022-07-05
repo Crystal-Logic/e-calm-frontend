@@ -32,7 +32,7 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
           .filter((cat) => cat !== ArticleCategory.all)
           .map((category) =>
             articlesByCategory[category].map((article) => ({
-              params: { slug: category, id: String(article.id) },
+              params: { category, id: String(article.id) },
               locale,
             })),
           )

@@ -104,7 +104,8 @@
     "btn": "Підтвердити"
   },
   "articles": {
-    "listTitle": "Статті психологів"
+    "listTitle": "Статті психологів",
+    "allArticles": "Всі статті"
   },
   "navigation": {
     "/useful-articles": "Корисні статті",
