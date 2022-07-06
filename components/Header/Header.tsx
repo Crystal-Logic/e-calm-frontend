@@ -14,9 +14,7 @@ import {
   Flex,
   HStack,
   Heading,
-  Hide,
   IconButton,
-  Show,
   Text,
   VStack,
   useBoolean,
@@ -61,18 +59,16 @@ export const Header = () => {
   return (
     <Box position="relative" overflow="hidden">
       <Container>
-        <Hide above="md">
-          <Flex alignItems="center" justifyContent="flex-end" py={2} mr={-2} mb={10}>
-            <LanguageSwitcher />
-            <IconButton
-              onClick={setIsOpened.toggle}
-              aria-label="open menu"
-              variant="unstyled"
-              size="lg"
-              icon={<HamburgerIcon />}
-            />
-          </Flex>
-        </Hide>
+        <Flex alignItems="center" justifyContent="flex-end" py={2} mr={-2} display={{ base: 'flex', md: 'none' }}>
+          <LanguageSwitcher />
+          <IconButton
+            onClick={setIsOpened.toggle}
+            aria-label="open menu"
+            variant="unstyled"
+            size="lg"
+            icon={<HamburgerIcon />}
+          />
+        </Flex>
 
         <Flex
           py={{ base: 0, md: 10 }}
@@ -117,24 +113,20 @@ export const Header = () => {
             </Heading>
           </Box>
           <Flex alignItems="flex-start" ml={{ md: 'auto' }}>
-            <Hide below="md">
-              <Box mr={8}>
-                <LanguageSwitcher />
-              </Box>
-            </Hide>
+            <Box mr={8} display={{ base: 'none', md: 'flex' }}>
+              <LanguageSwitcher />
+            </Box>
             <Box flex="none" width={{ base: '64px', md: '80px' }}>
               <TridentIcon />
             </Box>
           </Flex>
         </Flex>
 
-        <Hide below="md">
-          <HStack as={'nav'} spacing={6} mb={8}>
-            {navLinks.map((link) => (
-              <NavLink key={link} url={link} title={navLinksTitles[link]} />
-            ))}
-          </HStack>
-        </Hide>
+        <HStack as="nav" spacing={6} mb={8} display={{ base: 'none', md: 'flex' }}>
+          {navLinks.map((link) => (
+            <NavLink key={link} url={link} title={navLinksTitles[link]} />
+          ))}
+        </HStack>
       </Container>
 
       <Drawer isOpen={isOpened} placement="right" onClose={setIsOpened.off} size="full">
