@@ -18,7 +18,7 @@ export const CategoriesNav = ({ categoriesInfo, activeCategory, onClick }: Categ
   const categoriesTranslations = t('categories', { returnObjects: true }) as Record<string, string>;
 
   return (
-    <HStack as={'nav'} spacing={{ base: 4, md: 6 }} mt={8} mb={6} overflow="auto" whiteSpace="nowrap" pb={2}>
+    <HStack as="nav" spacing={{ base: 4, md: 6 }} mt={8} mb={6} overflow="auto" whiteSpace="nowrap" pb={2}>
       {articleCategories.map((category) => (
         <NextLink key={category} passHref href={category} scroll={false}>
           <Link

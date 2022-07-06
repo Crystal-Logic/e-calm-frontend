@@ -1,4 +1,4 @@
-import { Box, Container, Divider, Flex, Heading, Hide, Text, VStack } from '@chakra-ui/react';
+import { Box, Container, Divider, Flex, Heading, Text, VStack } from '@chakra-ui/react';
 import { useTranslation } from 'next-i18next';
 
 import ECalmLogoWhite from '../../assets/icons/e-calm-logo-white.svg';
@@ -27,9 +27,7 @@ export const Footer = () => {
               <ContactForm type={ContactFormType.patient} variant="light" />
             </Box>
           </Box>
-          <Hide above="md">
-            <Divider />
-          </Hide>
+          <Divider display={{ base: 'block', md: 'none' }} />
           <Box flex={1}>
             <Heading size="sm">{t('footer.linksTitle')}</Heading>
             <VStack as="nav" spacing={2.5} alignItems="flex-start" mt={8}>
