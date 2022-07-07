@@ -18,6 +18,7 @@ type ArticleProps = {
 
 const ArticlePage: NextPage<ArticleProps> = ({ article, otherArticle }) => {
   const { t } = useTranslation('common');
+  const categoriesTranslations = t('categories', { returnObjects: true }) as Record<string, string>;
 
   return (
     <Container py={{ base: '56px', md: '112px' }}>
@@ -57,7 +58,7 @@ const ArticlePage: NextPage<ArticleProps> = ({ article, otherArticle }) => {
                 {otherArticle.categories.map((cat) => (
                   <NextLink key={cat} passHref href={`/${cat}`}>
                     <a>
-                      <Badge>{cat}</Badge>
+                      <Badge>{categoriesTranslations[cat]}</Badge>
                     </a>
                   </NextLink>
                 ))}
