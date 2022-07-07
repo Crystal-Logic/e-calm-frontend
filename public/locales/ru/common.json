@@ -106,6 +106,10 @@
     "listTitle": "Статьи психологов",
     "allArticles": "Все статьи"
   },
+  "article": {
+    "shareTitle": "Поделится статьей",
+    "otherArticles": "Другие статьи"
+  },
   "navigation": {
     "/useful-articles": "Полезные статьи",
     "/pov": "Точки зрения",

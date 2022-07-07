@@ -19,17 +19,7 @@ export const ArticleCard = ({ article }: { article: ArticlePreview }) => {
       <Box p={4}>
         <HStack spacing={4} mb={4}>
           {article.categories.map((category) => (
-            <Badge
-              key={category}
-              py={1}
-              px={2}
-              bg="brand.lightBlue"
-              fontWeight="normal"
-              textTransform="none"
-              color="brand.black"
-            >
-              {categoriesTranslations[category]}
-            </Badge>
+            <Badge key={category}>{categoriesTranslations[category]}</Badge>
           ))}
         </HStack>
         <Heading size={{ base: 'xxs', md: 'xs' }}>{article.title}</Heading>
