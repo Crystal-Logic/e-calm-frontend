@@ -107,6 +107,10 @@
     "listTitle": "Статті психологів",
     "allArticles": "Всі статті"
   },
+  "article": {
+    "shareTitle": "Поділитись статею",
+    "otherArticles": "Інші статті"
+  },
   "navigation": {
     "/useful-articles": "Корисні статті",
     "/pov": "Точки зору",
