@@ -30,7 +30,7 @@ const ArticlePage: NextPage<ArticleProps> = ({ article, otherArticle, params }) 
         title={article.title}
         description={' '}
         openGraph={{ title: article.title, description: ' ', images: [{ url: article.image }] }}
-        canonical={`{${process.env.NEXT_PUBLIC_APP_URL}/${params.category}/${params.id}`}
+        canonical={`${process.env.NEXT_PUBLIC_APP_URL}/${params.category}/${params.id}`}
       />
       <Container py={{ base: '56px', md: '112px' }}>
         <VStack alignItems="center">

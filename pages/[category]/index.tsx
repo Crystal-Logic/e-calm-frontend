@@ -27,7 +27,7 @@ const ArticlesList: NextPage<ArticlesListProps> = ({ articlesListByCategory, cat
       <NextSeo
         title={pageTitle}
         openGraph={{ title: pageTitle }}
-        canonical={`{${process.env.NEXT_PUBLIC_APP_URL}/${category}`}
+        canonical={`${process.env.NEXT_PUBLIC_APP_URL}/${category}`}
       />
       <Container py={{ base: 8, md: 16 }}>
         <Heading as="h2" size={{ base: 'md', md: '2xl' }}>
