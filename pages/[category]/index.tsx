@@ -49,13 +49,21 @@ export const getStaticProps: GetStaticProps<ArticlesListProps, { category: Artic
   locale,
   params,
 }) => {
+  const category = params?.category;
+
+  if (!category || (category && !articleCategories.includes(category))) {
+    return {
+      notFound: true,
+    };
+  }
+
   const articlesListByCategory = await ArticleService.getArticlesListByCategory();
   const categoriesInfo = ArticleService.getCategoriesInfo(articlesListByCategory);
 
   return {
     props: {
       articlesListByCategory,
-      category: params!.category,
+      category,
       categoriesInfo,
       ...(await serverSideTranslations(locale!)),
     },

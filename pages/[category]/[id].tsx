@@ -96,18 +96,25 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
 
 export const getStaticProps: GetStaticProps<ArticleProps, { id: string }> = async ({ locale, params }) => {
   const articles = await ArticleService.getAllArticles();
+  const article = articles.find((article) => String(article.id) === params?.id);
   const otherArticles = articles.filter((art) => String(art.id) !== params?.id);
   const randomIndex = Math.floor(Math.random() * otherArticles.length);
   const otherArticle = otherArticles[randomIndex];
 
+  if (!article) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: {
-      article: articles.find((article) => String(article.id) === params!.id)!,
+      article,
       otherArticle: otherArticle
         ? {
-            title: otherArticle?.title,
-            categories: otherArticle?.categories,
-            id: otherArticle?.id,
+            title: otherArticle.title,
+            categories: otherArticle.categories,
+            id: otherArticle.id,
           }
         : null,
       locale: locale!,
