@@ -16,7 +16,7 @@ export const navLinks = [
   `/${ArticleCategory.usefulArticles}`,
   `/${ArticleCategory.pov}`,
   `/${ArticleCategory.experience}`,
-  `/testing`,
+  // `/testing`,
   '/#contacts',
   '/#faq',
 ] as const;
