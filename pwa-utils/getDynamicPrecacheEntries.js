@@ -9,7 +9,7 @@ const api = axios.create({
   },
 });
 
-const locales = ['ua'];
+const locales = ['ua', 'ru'];
 const defaultLocale = 'ua';
 const articleCategories = ['articles', 'useful-articles', 'pov', 'experience'];
 
