@@ -2,6 +2,7 @@ import type { ComponentType } from 'react';
 
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
+import Head from 'next/head';
 
 import { ChakraProvider } from '@chakra-ui/react';
 import { appWithTranslation, useTranslation } from 'next-i18next';
@@ -47,6 +48,21 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
         }}
       />
       <Fonts />
+      <Head>
+        <meta name="application-name" content="ЄCпокій" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="ЄCпокій" />
+        <meta name="description" content="Some description" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="mobile-web-app-capable" content="yes" />
+
+        <link rel="apple-touch-icon" href="/icons/icon-512x512.png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152x152.png" />
+
+        <link rel="icon" type="image/png" sizes="48x48" href="/icons/icon-48x48.png" />
+        <link rel="manifest" href="/manifest.json" />
+      </Head>
       <LayoutComponent>
         <Component {...pageProps} />
       </LayoutComponent>
