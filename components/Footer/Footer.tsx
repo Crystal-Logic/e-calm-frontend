@@ -1,4 +1,7 @@
+import { useState } from 'react';
+
 import { Box, Container, Divider, Flex, Heading, Text, VStack } from '@chakra-ui/react';
+import { AxiosError } from 'axios';
 import { useTranslation } from 'next-i18next';
 
 import ECalmLogoWhite from '../../assets/icons/e-calm-logo-white.svg';
@@ -7,13 +10,49 @@ import InstagramIcon from '../../assets/icons/instagram.svg';
 import TelegramIcon from '../../assets/icons/telegram.svg';
 import TridentIcon from '../../assets/icons/trident.svg';
 import TwitterIcon from '../../assets/icons/twitter.svg';
-import { navLinks } from '../../types';
-import { ContactForm, ContactFormType } from '../ContactForm';
+import { FormService } from '../../services';
+import { ContactFormType, ContactFormVariant, navLinks } from '../../types';
+import { ContactForm } from '../ContactForm';
+import { FormModalRef, FormModalState } from '../FormModal';
 import { NavLink } from '../NavLink';
+
+const formInitialState: ContactFormType = {
+  type: ContactFormVariant.patient,
+  name: '',
+  phone: '',
+  checkbox: false,
+  nameError: null,
+  phoneError: null,
+  checkboxError: null,
+};
 
 export const Footer = () => {
   const { t } = useTranslation('common');
   const navLinksTitles = t('navigation', { returnObjects: true }) as Record<typeof navLinks[number], string>;
+
+  const [form, setForm] = useState(formInitialState);
+
+  const changeForm = (value: Partial<ContactFormType>) => {
+    setForm((form) => ({ ...form, ...value }));
+  };
+
+  const handleSubmit = async () => {
+    try {
+      await FormService.submit(form);
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        const errors = e.response?.data;
+        if (errors?.phone) {
+          changeForm({ phoneError: errors.phone[0] });
+        }
+        if (errors.code && Object.keys(errors).length === 1) {
+          await FormService.otp({ phone: form.phone });
+          FormModalRef.current?.set(FormModalState.otp, form);
+          setForm(formInitialState);
+        }
+      }
+    }
+  };
 
   return (
     <Box bg="brand.black" color="brand.white">
@@ -24,7 +63,7 @@ export const Footer = () => {
               {t('footer.formTitle')}
             </Heading>
             <Box maxW="420">
-              <ContactForm type={ContactFormType.patient} variant="light" />
+              <ContactForm form={form} onFormChange={changeForm} onSubmit={handleSubmit} variant="light" />
             </Box>
           </Box>
           <Divider display={{ base: 'block', md: 'none' }} />

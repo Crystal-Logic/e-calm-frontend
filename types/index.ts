@@ -1,3 +1,5 @@
+export * from './form';
+
 export enum ArticleCategory {
   all = 'articles',
   usefulArticles = 'useful-articles',
