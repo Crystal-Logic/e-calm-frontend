@@ -13,7 +13,7 @@ import { FAQ } from '../components/FAQ';
 import { FormModalRef, FormModalState } from '../components/FormModal';
 import { HomeArticles } from '../components/HomeArticles';
 import { ArticleService } from '../services';
-import { ArticleCategory, ArticlesPreviewByCategory, articleCategories } from '../types';
+import { ArticleCategory, ArticlesPreviewByCategory, ContactFormVariant, articleCategories } from '../types';
 
 type HomeProps = {
   categoriesInfo: Record<ArticleCategory, number>;
@@ -40,14 +40,16 @@ const Home: NextPage<HomeProps> = ({ categoriesInfo, articles }) => {
             <Button
               variant="solidWhite"
               size={{ base: 'md', md: 'lg' }}
-              onClick={() => FormModalRef.current?.set(FormModalState.patient)}
+              onClick={() => FormModalRef.current?.set(FormModalState.patient, { type: ContactFormVariant.patient })}
             >
               {t('formsSection.getHelp')}
             </Button>
             <Button
               variant="outlineWhite"
               size={{ base: 'md', md: 'lg' }}
-              onClick={() => FormModalRef.current?.set(FormModalState.psychologist)}
+              onClick={() =>
+                FormModalRef.current?.set(FormModalState.psychologist, { type: ContactFormVariant.psychologist })
+              }
             >
               {t('formsSection.becomePsychologist')}
             </Button>
@@ -133,14 +135,16 @@ const Home: NextPage<HomeProps> = ({ categoriesInfo, articles }) => {
             <Button
               variant="solidWhite"
               size={{ base: 'md', md: 'lg' }}
-              onClick={() => FormModalRef.current?.set(FormModalState.patient)}
+              onClick={() => FormModalRef.current?.set(FormModalState.patient, { type: ContactFormVariant.patient })}
             >
               {t('formsSection.getHelp')}
             </Button>
             <Button
               variant="outlineWhite"
               size={{ base: 'md', md: 'lg' }}
-              onClick={() => FormModalRef.current?.set(FormModalState.psychologist)}
+              onClick={() =>
+                FormModalRef.current?.set(FormModalState.psychologist, { type: ContactFormVariant.psychologist })
+              }
             >
               {t('formsSection.becomePsychologist')}
             </Button>
