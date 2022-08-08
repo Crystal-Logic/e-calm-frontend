@@ -25,7 +25,7 @@ export default async (phase, { defaultConfig }) => {
       return config;
     },
     images: {
-      domains: ['3.71.20.14.nip.io'],
+      domains: ['3.71.20.14.nip.io', 'e-calm.s3.amazonaws.com'],
     },
     pwa: {
       dest: 'public',
