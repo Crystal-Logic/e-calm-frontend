@@ -3,9 +3,10 @@ import { Fragment } from 'react';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 
-import { HamburgerIcon } from '@chakra-ui/icons';
+import { ChevronDownIcon, HamburgerIcon } from '@chakra-ui/icons';
 import {
   Box,
+  Collapse,
   Container,
   Drawer,
   DrawerCloseButton,
@@ -23,7 +24,7 @@ import { useTranslation } from 'next-i18next';
 
 import ECalmLogo from '../../assets/icons/e-calm-logo.svg';
 import TridentIcon from '../../assets/icons/trident.svg';
-import { navLinks } from '../../types';
+import { ArticleCategory, articleSubCategories, navLinks } from '../../types';
 import { NavLink } from '../NavLink';
 
 const localesTitles: Record<string, string> = {
@@ -51,18 +52,44 @@ const LanguageSwitcher = () => {
 };
 
 export const Header = () => {
-  const [isOpened, setIsOpened] = useBoolean();
+  const [drawerIsOpened, setDrawerIsOpened] = useBoolean();
+  const [subNavIsOpened, setSubNavIsOpened] = useBoolean();
 
   const { t } = useTranslation('common');
   const navLinksTitles = t('navigation', { returnObjects: true }) as Record<typeof navLinks[number], string>;
+  const categoriesTranslations = t('categories', { returnObjects: true }) as Record<string, string>;
 
   return (
-    <Box position="relative" overflow="hidden">
+    <Box position="relative" pb={{ base: 1, md: 8 }}>
+      <Box overflow="hidden" position="absolute" w="100%" h="100%" pointerEvents="none">
+        <Box
+          position="absolute"
+          bg="#FFC701"
+          w="clamp(250px, 50vw, 600px)"
+          h="clamp(250px, 50vw, 600px)"
+          left="clamp(-300px, -25vw, -125px)"
+          bottom="clamp(-200px, -25vw, -125px)"
+          borderRadius="50%"
+          sx={{ filter: 'blur(clamp(100px, 20vw, 200px))' }}
+          zIndex={-1}
+        />
+        <Box
+          position="absolute"
+          bg="#066AFF"
+          w="clamp(250px, 50vw, 600px)"
+          h="clamp(250px, 50vw, 600px)"
+          right="clamp(-300px, -25vw, -125px)"
+          top="clamp(-200px, -25vw, -125px)"
+          borderRadius="50%"
+          sx={{ filter: 'blur(clamp(100px, 20vw, 200px))' }}
+          zIndex={-1}
+        />
+      </Box>
       <Container>
         <Flex alignItems="center" justifyContent="flex-end" py={2} mr={-2} display={{ base: 'flex', md: 'none' }}>
           <LanguageSwitcher />
           <IconButton
-            onClick={setIsOpened.toggle}
+            onClick={setDrawerIsOpened.toggle}
             aria-label="open menu"
             variant="unstyled"
             size="lg"
@@ -77,28 +104,6 @@ export const Header = () => {
           mb={{ base: 6, md: 24 }}
           alignItems="flex-start"
         >
-          <Box
-            position="absolute"
-            bg="#FFC701"
-            w="clamp(250px, 50vw, 600px)"
-            h="clamp(250px, 50vw, 600px)"
-            left="clamp(-300px, -25vw, -125px)"
-            bottom="clamp(-200px, -25vw, -125px)"
-            borderRadius="50%"
-            sx={{ filter: 'blur(clamp(100px, 20vw, 200px))' }}
-            zIndex={-1}
-          />
-          <Box
-            position="absolute"
-            bg="#066AFF"
-            w="clamp(250px, 50vw, 600px)"
-            h="clamp(250px, 50vw, 600px)"
-            right="clamp(-300px, -25vw, -125px)"
-            top="clamp(-200px, -25vw, -125px)"
-            borderRadius="50%"
-            sx={{ filter: 'blur(clamp(100px, 20vw, 200px))' }}
-            zIndex={-1}
-          />
           <NextLink href="/" passHref>
             <Box flex="none" width={{ base: '64px', md: '80px' }} cursor="pointer">
               <ECalmLogo />
@@ -122,14 +127,37 @@ export const Header = () => {
           </Flex>
         </Flex>
 
-        <HStack as="nav" spacing={6} mb={8} display={{ base: 'none', md: 'flex' }}>
+        <HStack as="nav" spacing={6} display={{ base: 'none', md: 'flex' }}>
           {navLinks.map((link) => (
-            <NavLink key={link} url={link} title={navLinksTitles[link]} />
+            <>
+              {link === `/${ArticleCategory.usefulArticles}` ? (
+                <Box onMouseEnter={setSubNavIsOpened.on} onMouseLeave={setSubNavIsOpened.off}>
+                  <NavLink key={link} url={link} title={navLinksTitles[link]}></NavLink>
+                  <Collapse in={subNavIsOpened}>
+                    <Box pt={8} position="absolute" left={0} w="100%" zIndex={1} shadow="md">
+                      <Box bg="white" p={8}>
+                        <Container>
+                          <HStack spacing={8}>
+                            {articleSubCategories.map((link) => (
+                              <Box key={link} onClick={setSubNavIsOpened.off}>
+                                <NavLink url={`/${link}`} title={categoriesTranslations[link]}></NavLink>
+                              </Box>
+                            ))}
+                          </HStack>
+                        </Container>
+                      </Box>
+                    </Box>
+                  </Collapse>
+                </Box>
+              ) : (
+                <NavLink key={link} url={link} title={navLinksTitles[link]} />
+              )}
+            </>
           ))}
         </HStack>
       </Container>
 
-      <Drawer isOpen={isOpened} placement="right" onClose={setIsOpened.off} size="full">
+      <Drawer isOpen={drawerIsOpened} placement="right" onClose={setDrawerIsOpened.off} size="full">
         <DrawerContent>
           <DrawerHeader
             display="flex"
@@ -141,7 +169,7 @@ export const Header = () => {
             borderBottomColor="#F6F6FA"
           >
             <NextLink href="/" passHref>
-              <Box w="32px" cursor="pointer" onClick={setIsOpened.off}>
+              <Box w="32px" cursor="pointer" onClick={setDrawerIsOpened.off}>
                 <ECalmLogo />
               </Box>
             </NextLink>
@@ -149,7 +177,38 @@ export const Header = () => {
           </DrawerHeader>
           <VStack as="nav" spacing={2} alignItems="flex-start" mt={8} pl={3}>
             {navLinks.map((link) => (
-              <NavLink key={link} url={link} title={navLinksTitles[link]} onClick={setIsOpened.off} />
+              <>
+                <NavLink key={link} url={link} title={navLinksTitles[link]} onClick={setDrawerIsOpened.off} />
+                {link === `/${ArticleCategory.usefulArticles}` && (
+                  <Box alignSelf="stretch">
+                    <Flex onClick={setSubNavIsOpened.toggle} alignItems="flex-end">
+                      {navLinksTitles[link]}
+                      <ChevronDownIcon
+                        ml={2}
+                        w="22px"
+                        h="22px"
+                        __css={{
+                          transform: subNavIsOpened ? 'rotate(-180deg)' : undefined,
+                          transition: 'transform 0.2s',
+                          transformOrigin: 'center',
+                        }}
+                      />
+                    </Flex>
+                    <Collapse in={subNavIsOpened} animateOpacity>
+                      <VStack as="nav" spacing={2} alignItems="flex-start" px={4} py={2}>
+                        {articleSubCategories.map((link) => (
+                          <NavLink
+                            key={link}
+                            url={`/${link}`}
+                            title={categoriesTranslations[link]}
+                            onClick={setDrawerIsOpened.off}
+                          />
+                        ))}
+                      </VStack>
+                    </Collapse>
+                  </Box>
+                )}
+              </>
             ))}
           </VStack>
         </DrawerContent>

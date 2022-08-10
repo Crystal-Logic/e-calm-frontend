@@ -13,12 +13,12 @@ export const ArticleCard = ({ article }: { article: ArticlePreview }) => {
     <Box boxShadow="lg">
       <AspectRatio ratio={16 / 10}>
         <Box bg="brand.lightBlue">
-          <Image src={article.image} layout="fill" alt={article.title} />
+          {article.image && <Image src={article.image} layout="fill" alt={article.title} />}
         </Box>
       </AspectRatio>
       <Box p={4}>
         <HStack spacing={4} mb={4}>
-          {article.categories.map((category) => (
+          {[...article.categories, ...article.subCategories].map((category) => (
             <Badge key={category}>{categoriesTranslations[category]}</Badge>
           ))}
         </HStack>
