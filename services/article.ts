@@ -2,9 +2,12 @@ import {
   Article,
   ArticleCategory,
   ArticlePreview,
+  ArticleSubCategory,
   ArticlesByCategory,
   ArticlesPreviewByCategory,
+  ArticlesPreviewBySubCategory,
   articleCategories,
+  articleSubCategories,
 } from '../types';
 import { api } from './api';
 
@@ -38,6 +41,7 @@ export const ArticleService = {
       image: article.image,
       title: article.title,
       categories: article.categories,
+      subCategories: article.subCategories,
     });
 
     return articleCategories.reduce(
@@ -51,6 +55,25 @@ export const ArticleService = {
     return articleCategories.reduce(
       (acc, category) => Object.assign(acc, { [category]: articlesByCategory[category].length }),
       {} as Record<ArticleCategory, number>,
+    );
+  },
+  getArticlesListBySubCategory: (articles: ArticlePreview[]) => {
+    const articlesBySubCategory: ArticlesPreviewBySubCategory = {
+      [ArticleSubCategory.mentalHealth]: [],
+      [ArticleSubCategory.familyRelationships]: [],
+    };
+
+    articles.forEach((article) => {
+      article.subCategories.forEach((category) => {
+        articlesBySubCategory[category].push(article);
+      });
+    });
+    return articlesBySubCategory;
+  },
+  getSubCategoriesInfo: (articlesBySubCategory: ArticlesPreviewBySubCategory): Record<ArticleSubCategory, number> => {
+    return articleSubCategories.reduce(
+      (acc, subCategory) => Object.assign(acc, { [subCategory]: articlesBySubCategory[subCategory].length }),
+      {} as Record<ArticleSubCategory, number>,
     );
   },
 };

@@ -16,7 +16,7 @@ type PageParams = { category: ArticleCategory; id: string };
 
 type ArticleProps = {
   article: Article;
-  otherArticle: Pick<Article, 'id' | 'categories' | 'title'> | null;
+  otherArticle: Pick<Article, 'id' | 'categories' | 'title' | 'subCategories'> | null;
   params: PageParams;
 };
 
@@ -72,7 +72,7 @@ const ArticlePage: NextPage<ArticleProps> = ({ article, otherArticle, params }) 
                 <Heading size="sm">{t('article.otherArticles')}</Heading>
                 <Divider opacity={1} borderColor="black" borderBottomWidth={2} mt={6} mb={4} />
                 <Flex gap={2} mb={2}>
-                  {otherArticle.categories.map((cat) => (
+                  {[...otherArticle.categories, ...otherArticle.subCategories].map((cat) => (
                     <NextLink key={cat} passHref href={`/${cat}`}>
                       <a>
                         <Badge>{categoriesTranslations[cat]}</Badge>
@@ -135,6 +135,7 @@ export const getStaticProps: GetStaticProps<ArticleProps, PageParams> = async ({
         ? {
             title: otherArticle.title,
             categories: otherArticle.categories,
+            subCategories: otherArticle.subCategories,
             id: otherArticle.id,
           }
         : null,

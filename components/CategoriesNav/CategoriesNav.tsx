@@ -5,21 +5,27 @@ import NextLink from 'next/link';
 import { HStack, Link, Text } from '@chakra-ui/react';
 import { useTranslation } from 'next-i18next';
 
-import { ArticleCategory, articleCategories } from '../../types';
+import { ArticleCategory } from '../../types';
 
-type CategoriesNavProps = {
-  categoriesInfo: Record<ArticleCategory, number>;
-  activeCategory: ArticleCategory;
-  onClick?: (e: MouseEvent<HTMLAnchorElement>, category: ArticleCategory) => void;
+type CategoriesNavProps<T extends string> = {
+  items: T[];
+  categoriesInfo: Record<T, number>;
+  activeCategory: T | null;
+  onClick?: (e: MouseEvent<HTMLAnchorElement>, category: T) => void;
 };
 
-export const CategoriesNav = ({ categoriesInfo, activeCategory, onClick }: CategoriesNavProps) => {
+export const CategoriesNav = <T extends string>({
+  items,
+  categoriesInfo,
+  activeCategory,
+  onClick,
+}: CategoriesNavProps<T>) => {
   const { t } = useTranslation('common');
   const categoriesTranslations = t('categories', { returnObjects: true }) as Record<string, string>;
 
   return (
-    <HStack as="nav" spacing={{ base: 4, md: 6 }} mt={8} mb={6} overflow="auto" whiteSpace="nowrap" pb={2}>
-      {articleCategories.map((category) => (
+    <HStack as="nav" spacing={{ base: 4, md: 6 }} mt={2} mb={2} overflow="auto" whiteSpace="nowrap" pb={2}>
+      {items.map((category) => (
         <NextLink key={category} passHref href={`/${category}`} scroll={false}>
           <Link
             fontSize={{ base: 'sm', md: 'xl' }}
