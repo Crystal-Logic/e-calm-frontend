@@ -35,7 +35,7 @@ const ArticlesList: NextPage<ArticlesListProps> = ({
   const { t } = useTranslation('common');
   const categoriesTranslations = t('categories', { returnObjects: true }) as Record<string, string>;
 
-  const pageTitle = `${t('articles.listTitle')} | ${categoriesTranslations[category]}`;
+  const pageTitle = `${t('articles.listTitle')} | ${categoriesTranslations[subCategory || category]}`;
   return (
     <>
       <NextSeo
