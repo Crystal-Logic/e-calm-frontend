@@ -32,6 +32,7 @@ const Home: NextPage<HomeProps> = ({ categoriesInfo, articles }) => {
         backgroundPosition="center"
         color="white"
       >
+        <div>test</div>
         <Container size="md" py={{ base: 20, md: 28 }}>
           <Heading as="h2" maxW="800px" size={{ base: 'md', md: '2xl' }}>
             {t('formsSection.title')}
