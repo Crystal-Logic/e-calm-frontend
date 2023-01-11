@@ -11,7 +11,7 @@ const api = axios.create({
 
 const locales = ['ua', 'ru'];
 const defaultLocale = 'ua';
-const articleCategories = ['articles', 'useful-articles', 'pov', 'experience'];
+const articleCategories = ['articles', 'useful-articles', 'help-for-children', 'family-relationships', 'mental-health'];
 
 const pages = articleCategories.map((category) => ({
   route: `/${category}`,
@@ -45,6 +45,7 @@ const getDynamicPageEntries = async (buildId) => {
     [articleCategories[1]]: [],
     [articleCategories[2]]: [],
     [articleCategories[3]]: [],
+    [articleCategories[4]]: [],
   };
 
   articles.forEach((article) => {

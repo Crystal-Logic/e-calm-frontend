@@ -22,8 +22,6 @@ export const ArticleService = {
     const articlesByCategory: ArticlesByCategory = {
       [ArticleCategory.all]: articles,
       [ArticleCategory.usefulArticles]: [],
-      [ArticleCategory.pov]: [],
-      [ArticleCategory.experience]: [],
     };
 
     articles.forEach((article) => {
@@ -61,6 +59,7 @@ export const ArticleService = {
     const articlesBySubCategory: ArticlesPreviewBySubCategory = {
       [ArticleSubCategory.mentalHealth]: [],
       [ArticleSubCategory.familyRelationships]: [],
+      [ArticleSubCategory.helpForChildren]: [],
     };
 
     articles.forEach((article) => {
