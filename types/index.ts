@@ -3,28 +3,24 @@ export * from './form';
 export enum ArticleCategory {
   all = 'articles',
   usefulArticles = 'useful-articles',
-  pov = 'pov',
-  experience = 'experience',
 }
 
 export enum ArticleSubCategory {
   mentalHealth = 'mental-health',
+  helpForChildren = 'help-for-children',
   familyRelationships = 'family-relationships',
 }
 
-export const articleCategories = [
-  ArticleCategory.all,
-  ArticleCategory.usefulArticles,
-  ArticleCategory.pov,
-  ArticleCategory.experience,
-];
+export const articleCategories = [ArticleCategory.all, ArticleCategory.usefulArticles];
 
-export const articleSubCategories = [ArticleSubCategory.mentalHealth, ArticleSubCategory.familyRelationships];
+export const articleSubCategories = [
+  ArticleSubCategory.mentalHealth,
+  ArticleSubCategory.familyRelationships,
+  ArticleSubCategory.helpForChildren,
+];
 
 export const navLinks = [
   `/${ArticleCategory.usefulArticles}`,
-  `/${ArticleCategory.pov}`,
-  `/${ArticleCategory.experience}`,
   // `/testing`,
   '/#contacts',
   '/#faq',
