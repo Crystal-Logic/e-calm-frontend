@@ -10,8 +10,8 @@ export default async (phase, { defaultConfig }) => {
     ...defaultConfig,
     reactStrictMode: true,
     i18n: {
-      locales: ['ua', 'ru'],
-      defaultLocale: 'ua',
+      locales: ['uk', 'ru'],
+      defaultLocale: 'uk',
       localeDetection: false,
       localePath: path.resolve('./public/locales'),
     },
@@ -58,7 +58,7 @@ export default async (phase, { defaultConfig }) => {
           '!locales/**/*',
         ],
       }),
-      ...await getDynamicPrecacheEntries(buildId),
+      ...(await getDynamicPrecacheEntries(buildId)),
     ];
   }
 
