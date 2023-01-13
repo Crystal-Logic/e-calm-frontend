@@ -4,8 +4,8 @@ import { Box, Button, Container, Flex, Heading, Hide, Link, Text } from '@chakra
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import field from '../assets/field.jpg';
-import hands from '../assets/hands.jpg';
+import field from '../assets/field.webp';
+import hands from '../assets/hands.webp';
 import ECalmLogoWhite from '../assets/icons/e-calm-logo-white.svg';
 import TridentIcon from '../assets/icons/trident.svg';
 import { Contacts } from '../components/Contacts';

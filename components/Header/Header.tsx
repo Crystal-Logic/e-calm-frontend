@@ -28,7 +28,7 @@ import { ArticleCategory, articleSubCategories, navLinks } from '../../types';
 import { NavLink } from '../NavLink';
 
 const localesTitles: Record<string, string> = {
-  ua: 'УКР',
+  uk: 'УКР',
   ru: 'РУС',
 };
 

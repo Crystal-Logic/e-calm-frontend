@@ -9,8 +9,8 @@ const api = axios.create({
   },
 });
 
-const locales = ['ua', 'ru'];
-const defaultLocale = 'ua';
+const locales = ['uk', 'ru'];
+const defaultLocale = 'uk';
 const articleCategories = ['articles', 'useful-articles', 'help-for-children', 'family-relationships', 'mental-health'];
 
 const pages = articleCategories.map((category) => ({
