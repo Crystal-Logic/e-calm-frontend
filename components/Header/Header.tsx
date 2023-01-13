@@ -56,7 +56,7 @@ export const Header = () => {
   const [subNavIsOpened, setSubNavIsOpened] = useBoolean();
 
   const { t } = useTranslation('common');
-  const navLinksTitles = t('navigation', { returnObjects: true }) as Record<typeof navLinks[number], string>;
+  const navLinksTitles = t('navigation', { returnObjects: true }) as Record<(typeof navLinks)[number], string>;
   const categoriesTranslations = t('categories', { returnObjects: true }) as Record<string, string>;
 
   return (
@@ -128,11 +128,11 @@ export const Header = () => {
         </Flex>
 
         <HStack as="nav" spacing={6} display={{ base: 'none', md: 'flex' }}>
-          {navLinks.map((link) => (
-            <>
+          {navLinks.map((link, index) => (
+            <Fragment key={index}>
               {link === `/${ArticleCategory.usefulArticles}` ? (
                 <Box onMouseEnter={setSubNavIsOpened.on} onMouseLeave={setSubNavIsOpened.off}>
-                  <NavLink key={link} url={link} title={navLinksTitles[link]}></NavLink>
+                  <NavLink url={link} title={navLinksTitles[link]}></NavLink>
                   <Collapse in={subNavIsOpened}>
                     <Box pt={8} position="absolute" left={0} w="100%" zIndex={1} shadow="md">
                       <Box bg="white" p={8}>
@@ -150,9 +150,9 @@ export const Header = () => {
                   </Collapse>
                 </Box>
               ) : (
-                <NavLink key={link} url={link} title={navLinksTitles[link]} />
+                <NavLink url={link} title={navLinksTitles[link]} />
               )}
-            </>
+            </Fragment>
           ))}
         </HStack>
       </Container>
@@ -177,8 +177,8 @@ export const Header = () => {
           </DrawerHeader>
           <VStack as="nav" spacing={2} alignItems="flex-start" mt={8} pl={3}>
             {navLinks.map((link) => (
-              <>
-                <NavLink key={link} url={link} title={navLinksTitles[link]} onClick={setDrawerIsOpened.off} />
+              <Fragment key={link}>
+                <NavLink url={link} title={navLinksTitles[link]} onClick={setDrawerIsOpened.off} />
                 {link === `/${ArticleCategory.usefulArticles}` && (
                   <Box alignSelf="stretch">
                     <Flex onClick={setSubNavIsOpened.toggle} alignItems="flex-end">
@@ -208,7 +208,7 @@ export const Header = () => {
                     </Collapse>
                   </Box>
                 )}
-              </>
+              </Fragment>
             ))}
           </VStack>
         </DrawerContent>
