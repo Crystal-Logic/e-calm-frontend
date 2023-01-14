@@ -10,8 +10,8 @@ type NavLinkProps = {
 };
 
 export const NavLink = ({ title, url, onClick, color = 'inherit' }: NavLinkProps) => (
-  <NextLink passHref href={url}>
-    <Link color={color} onClick={onClick}>
+  <NextLink href={url} onClick={onClick}>
+    <Link as="span" color={color}>
       {title}
     </Link>
   </NextLink>

@@ -17,9 +17,9 @@ export default function FourOhFour() {
   return (
     <>
       <NextSeo
-        title={t('404.title')}
+        title={t('404.title')!}
         openGraph={{
-          title: t('404.title'),
+          title: t('404.title')!,
         }}
       />
       <Flex
@@ -44,10 +44,8 @@ export default function FourOhFour() {
             {t('404.title')}
           </Heading>
           <Text mb={20}>{t('404.subTitle')}</Text>
-          <Link href="/" passHref>
-            <Button as="a" href="/">
-              {t('404.button')}
-            </Button>
+          <Link href="/">
+            <Button as="span">{t('404.button')}</Button>
           </Link>
         </Container>
       </Flex>

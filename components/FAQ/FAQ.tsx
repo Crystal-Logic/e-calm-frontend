@@ -51,7 +51,7 @@ export const FAQ: NextPage = () => {
         <Heading mb={{ base: 8, md: 12 }} as="h2" size={{ base: 'md', md: '2xl' }}>
           {t('title')}
         </Heading>
-        <Accordion allowToggle allowMultiple>
+        <Accordion allowMultiple>
           {(t('items', { returnObjects: true }) as FAQItemProps[]).map((item, index) => (
             <FAQItem {...item} key={index} />
           ))}

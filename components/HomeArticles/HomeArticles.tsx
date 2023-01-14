@@ -38,16 +38,14 @@ export const HomeArticles = ({ categoriesInfo, articles }: HomeArticlesProps) =>
         mt={4}
       >
         {articles[selectedCategory]?.map((article) => (
-          <NextLink key={article.id} passHref href={`/${article.categories[0]}/${article.id}`}>
-            <a>
-              <ArticleCard article={article} />
-            </a>
+          <NextLink key={article.id} href={`/${article.categories[0]}/${article.id}`}>
+            <ArticleCard article={article} />
           </NextLink>
         ))}
       </Grid>
       <Center mt={{ base: 8, md: 12 }}>
-        <NextLink passHref href={`/${selectedCategory}`}>
-          <Button>{t('articles.allArticles')}</Button>
+        <NextLink href={`/${selectedCategory}`}>
+          <Button as="span">{t('articles.allArticles')}</Button>
         </NextLink>
       </Center>
     </Container>

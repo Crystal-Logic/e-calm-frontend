@@ -26,12 +26,12 @@ export const CategoriesNav = <T extends string>({
   return (
     <HStack as="nav" spacing={{ base: 4, md: 6 }} mt={2} mb={2} overflow="auto" whiteSpace="nowrap" pb={2}>
       {items.map((category) => (
-        <NextLink key={category} passHref href={`/${category}`} scroll={false}>
+        <NextLink onClick={(e) => onClick && onClick(e, category)} key={category} href={`/${category}`} scroll={false}>
           <Link
+            as="span"
             fontSize={{ base: 'sm', md: 'xl' }}
             textDecoration={activeCategory === category ? 'underline' : 'initial'}
             color={activeCategory === category ? 'brand.black' : 'brand.grey'}
-            onClick={(e) => onClick && onClick(e, category)}
           >
             {categoriesTranslations[category]}
             {category !== ArticleCategory.all && (

@@ -104,7 +104,7 @@ export const Header = () => {
           mb={{ base: 6, md: 24 }}
           alignItems="flex-start"
         >
-          <NextLink href="/" passHref>
+          <NextLink title="Home page" href="/">
             <Box flex="none" width={{ base: '64px', md: '80px' }} cursor="pointer">
               <ECalmLogo />
             </Box>
@@ -132,7 +132,7 @@ export const Header = () => {
             <Fragment key={index}>
               {link === `/${ArticleCategory.usefulArticles}` ? (
                 <Box onMouseEnter={setSubNavIsOpened.on} onMouseLeave={setSubNavIsOpened.off}>
-                  <NavLink url={link} title={navLinksTitles[link]}></NavLink>
+                  <NavLink url={link} title={navLinksTitles[link]} />
                   <Collapse in={subNavIsOpened}>
                     <Box pt={8} position="absolute" left={0} w="100%" zIndex={1} shadow="md">
                       <Box bg="white" p={8}>
@@ -140,7 +140,7 @@ export const Header = () => {
                           <HStack spacing={8}>
                             {articleSubCategories.map((link) => (
                               <Box key={link} onClick={setSubNavIsOpened.off}>
-                                <NavLink url={`/${link}`} title={categoriesTranslations[link]}></NavLink>
+                                <NavLink url={`/${link}`} title={categoriesTranslations[link]} />
                               </Box>
                             ))}
                           </HStack>
@@ -168,7 +168,7 @@ export const Header = () => {
             borderBottom="2px"
             borderBottomColor="#F6F6FA"
           >
-            <NextLink href="/" passHref>
+            <NextLink href="/">
               <Box w="32px" cursor="pointer" onClick={setDrawerIsOpened.off}>
                 <ECalmLogo />
               </Box>
