@@ -12,7 +12,7 @@ import { Contacts } from '../components/Contacts';
 import { FAQ } from '../components/FAQ';
 import { FormModalRef, FormModalState } from '../components/FormModal';
 import { HomeArticles } from '../components/HomeArticles';
-import { ArticleService } from '../services';
+import { ArticleService } from '../services/article';
 import { ArticleCategory, ArticlesPreviewByCategory, ContactFormVariant, articleCategories } from '../types';
 
 type HomeProps = {

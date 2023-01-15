@@ -9,7 +9,7 @@ import { NextSeo } from 'next-seo';
 import FBIcon from '../../assets/icons/fb.svg';
 import TelegramIcon from '../../assets/icons/telegram.svg';
 import TwitterIcon from '../../assets/icons/twitter.svg';
-import { ArticleService } from '../../services';
+import { ArticleService } from '../../services/article';
 import { Article, ArticleCategory, articleCategories } from '../../types';
 
 type PageParams = { category: ArticleCategory; id: string };

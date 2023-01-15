@@ -10,7 +10,7 @@ import InstagramIcon from '../../assets/icons/instagram.svg';
 import TelegramIcon from '../../assets/icons/telegram.svg';
 import TridentIcon from '../../assets/icons/trident.svg';
 import TwitterIcon from '../../assets/icons/twitter.svg';
-import { FormService } from '../../services';
+import { FormService } from '../../services/form';
 import { ContactFormType, ContactFormVariant, navLinks } from '../../types';
 import { ContactForm } from '../ContactForm';
 import { FormModalRef, FormModalState } from '../FormModal';
@@ -28,7 +28,7 @@ const formInitialState: ContactFormType = {
 
 export const Footer = () => {
   const { t } = useTranslation('common');
-  const navLinksTitles = t('navigation', { returnObjects: true }) as Record<typeof navLinks[number], string>;
+  const navLinksTitles = t('navigation', { returnObjects: true }) as Record<(typeof navLinks)[number], string>;
 
   const [form, setForm] = useState(formInitialState);
 

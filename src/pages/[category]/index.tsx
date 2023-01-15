@@ -8,7 +8,7 @@ import { NextSeo } from 'next-seo';
 
 import { ArticleCard } from '../../components/ArticleCard';
 import { CategoriesNav } from '../../components/CategoriesNav';
-import { ArticleService } from '../../services';
+import { ArticleService } from '../../services/article';
 import {
   ArticleCategory,
   ArticlePreview,
