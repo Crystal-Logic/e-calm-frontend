@@ -6,7 +6,7 @@ import { Box, Button, Heading, IconButton, Text, VStack } from '@chakra-ui/react
 import { AxiosError } from 'axios';
 import { useTranslation } from 'next-i18next';
 
-import { FormService } from '../../services';
+import { FormService } from '../../services/form';
 import { ContactFormType, ContactFormVariant, FormModalType } from '../../types';
 import { ContactForm } from '../ContactForm';
 import { OtpForm } from '../OtpForm';
