@@ -26,19 +26,19 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <ChakraProvider theme={theme}>
       <DefaultSeo
-        title={t('header.title')}
-        description={t('header.subTitle')}
+        title={t('header.title')!}
+        description={t('header.subTitle')!}
         openGraph={{
           type: 'website',
-          title: t('header.title'),
-          description: t('header.subTitle'),
+          title: t('header.title')!,
+          description: t('header.subTitle')!,
           url: process.env.NEXT_PUBLIC_APP_URL,
           images: [
             {
               url: `${process.env.NEXT_PUBLIC_APP_URL}/og_logo.jpg`,
               width: 1200,
               height: 630,
-              alt: t('header.title'),
+              alt: t('header.title')!,
               type: 'image/jpeg',
             },
           ],
@@ -56,6 +56,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
         <meta name="description" content="Some description" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="theme-color" content="#fff" />
 
         <link rel="apple-touch-icon" href="/icons/icon-512x512.png" />
         <link rel="apple-touch-icon" sizes="152x152" href="/icons/icon-152x152.png" />

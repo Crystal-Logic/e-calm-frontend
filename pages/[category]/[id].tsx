@@ -73,15 +73,13 @@ const ArticlePage: NextPage<ArticleProps> = ({ article, otherArticle, params }) 
                 <Divider opacity={1} borderColor="black" borderBottomWidth={2} mt={6} mb={4} />
                 <Flex gap={2} mb={2}>
                   {[...otherArticle.categories, ...otherArticle.subCategories].map((cat) => (
-                    <NextLink key={cat} passHref href={`/${cat}`}>
-                      <a>
-                        <Badge>{categoriesTranslations[cat]}</Badge>
-                      </a>
+                    <NextLink key={cat} href={`/${cat}`}>
+                      <Badge>{categoriesTranslations[cat]}</Badge>
                     </NextLink>
                   ))}
                 </Flex>
-                <NextLink passHref href={`/${otherArticle.categories[0]}/${otherArticle.id}`}>
-                  <Link>{otherArticle.title}</Link>
+                <NextLink href={`/${otherArticle.categories[0]}/${otherArticle.id}`}>
+                  <Link as="span">{otherArticle.title}</Link>
                 </NextLink>
               </Box>
             )}

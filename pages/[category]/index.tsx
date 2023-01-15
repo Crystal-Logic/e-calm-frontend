@@ -55,10 +55,8 @@ const ArticlesList: NextPage<ArticlesListProps> = ({
           mt={4}
         >
           {articlesList.map((article) => (
-            <NextLink key={article.id} passHref href={`/${article.categories[0]}/${article.id}`}>
-              <a>
-                <ArticleCard article={article} />
-              </a>
+            <NextLink key={article.id} href={`/${article.categories[0]}/${article.id}`}>
+              <ArticleCard article={article} />
             </NextLink>
           ))}
         </Grid>

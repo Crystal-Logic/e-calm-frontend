@@ -12,9 +12,7 @@ export const ArticleCard = ({ article }: { article: ArticlePreview }) => {
   return (
     <Box boxShadow="lg">
       <AspectRatio ratio={16 / 10}>
-        <Box bg="brand.lightBlue">
-          {article.image && <Image src={article.image} layout="fill" alt={article.title} />}
-        </Box>
+        <Box bg="brand.lightBlue">{article.image && <Image fill src={article.image} alt={article.title} />}</Box>
       </AspectRatio>
       <Box p={4}>
         <HStack spacing={4} mb={4}>
