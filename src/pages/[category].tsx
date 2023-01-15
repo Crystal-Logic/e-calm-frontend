@@ -6,16 +6,10 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { NextSeo } from 'next-seo';
 
-import { ArticleCard } from '../../components/ArticleCard';
-import { CategoriesNav } from '../../components/CategoriesNav';
-import { ArticleService } from '../../services/article';
-import {
-  ArticleCategory,
-  ArticlePreview,
-  ArticleSubCategory,
-  articleCategories,
-  articleSubCategories,
-} from '../../types';
+import { ArticleCard } from '@/components/ArticleCard';
+import { CategoriesNav } from '@/components/CategoriesNav';
+import { ArticleService } from '@/services/article';
+import { ArticleCategory, ArticlePreview, ArticleSubCategory, articleCategories, articleSubCategories } from '@/types';
 
 type ArticlesListProps = {
   category: ArticleCategory;
@@ -55,7 +49,7 @@ const ArticlesList: NextPage<ArticlesListProps> = ({
           mt={4}
         >
           {articlesList.map((article) => (
-            <NextLink key={article.id} href={`/${article.categories[0]}/${article.id}`}>
+            <NextLink key={article.id} href={`/post/${article.slug}`}>
               <ArticleCard article={article} />
             </NextLink>
           ))}

@@ -1,8 +1,8 @@
 import _withPWA from 'next-pwa';
 
-import getBuildId from './pwa-utils/getBuildId.js';
-import getDynamicPrecacheEntries from './pwa-utils/getDynamicPrecacheEntries.js';
-import getStaticPrecacheEntries from './pwa-utils/getStaticPrecacheEntries.js';
+import { getBuildId } from './pwa-utils/getBuildId.mjs';
+import { getDynamicPrecacheEntries } from './pwa-utils/getDynamicPrecacheEntries.mjs';
+import { getStaticPrecacheEntries } from './pwa-utils/getStaticPrecacheEntries.mjs';
 
 export default async (phase) => {
   const nextConfig = {

@@ -1,5 +1,15 @@
-const path = require('path');
-const axios = require('axios');
+import slugify from '@sindresorhus/slugify';
+import axios from 'axios';
+import path from 'path';
+
+const getSlugForArticle = (article) => slugify(article.title, { customReplacements: [['и', 'y']] });
+
+const addSlugToArticles = (articles) => {
+  return articles.map((article) => ({
+    ...article,
+    slug: getSlugForArticle(article),
+  }));
+};
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -37,45 +47,27 @@ const getPageEntry = (buildId, page, locale) => {
   return entries;
 };
 
-const getDynamicPageEntries = async (buildId) => {
-  const articles = await api.get('/posts').then((res) => res.data);
-
-  const articlesByCategory = {
-    [articleCategories[0]]: articles.map((article) => article.id),
-    [articleCategories[1]]: [],
-    [articleCategories[2]]: [],
-    [articleCategories[3]]: [],
-    [articleCategories[4]]: [],
-  };
-
-  articles.forEach((article) => {
-    article.categories.forEach((category) => {
-      articlesByCategory[category].push(article.id);
-    });
-  });
+export const getDynamicPageEntries = async (buildId) => {
+  const articles = await api.get('/posts').then((res) => addSlugToArticles(res.data));
 
   return locales
     .map((locale) =>
-      articleCategories
-        .filter((cat) => cat !== 'articles')
-        .map((category) =>
-          articlesByCategory[category].map((id) =>
-            getPageEntry(
-              buildId,
-              {
-                route: `/${category}/${id}`,
-                precacheHtml: true,
-                precacheJson: true,
-              },
-              locale,
-            ),
-          ),
+      articles.map((article) =>
+        getPageEntry(
+          buildId,
+          {
+            route: `/post/${article.slug}`,
+            precacheHtml: true,
+            precacheJson: true,
+          },
+          locale,
         ),
+      ),
     )
-    .flat(3);
+    .flat(2);
 };
 
-const getDynamicPrecacheEntries = async (buildId) => {
+export const getDynamicPrecacheEntries = async (buildId) => {
   if (typeof buildId !== 'string') {
     console.error('getGeneratedPrecacheEntries: buildId should be a string', buildId);
     return;
@@ -89,5 +81,3 @@ const getDynamicPrecacheEntries = async (buildId) => {
 
   return staticPages.concat(dynamicPages);
 };
-
-module.exports = getDynamicPrecacheEntries;
