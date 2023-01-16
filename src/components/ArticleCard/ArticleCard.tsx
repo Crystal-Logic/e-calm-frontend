@@ -3,16 +3,18 @@ import Image from 'next/image';
 import { AspectRatio, Badge, Box, HStack, Heading } from '@chakra-ui/react';
 import { useTranslation } from 'next-i18next';
 
-import { ArticlePreview } from '../../types';
+import { ArticlePreview } from '@/types';
 
 export const ArticleCard = ({ article }: { article: ArticlePreview }) => {
   const { t } = useTranslation('common');
   const categoriesTranslations = t('categories', { returnObjects: true }) as Record<string, string>;
 
   return (
-    <Box boxShadow="lg">
+    <Box boxShadow="lg" h="full">
       <AspectRatio ratio={16 / 10}>
-        <Box bg="brand.lightBlue">{article.image && <Image fill src={article.image} alt={article.title} />}</Box>
+        <Box bg="brand.lightBlue">
+          {article.image && <Image src={article.image} alt={article.title} fill style={{ objectFit: 'cover' }} />}
+        </Box>
       </AspectRatio>
       <Box p={4}>
         <HStack spacing={4} mb={4}>

@@ -6,17 +6,17 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { NextSeo } from 'next-seo';
 
-import FBIcon from '../../assets/icons/fb.svg';
-import TelegramIcon from '../../assets/icons/telegram.svg';
-import TwitterIcon from '../../assets/icons/twitter.svg';
-import { ArticleService } from '../../services/article';
-import { Article, ArticleCategory, articleCategories } from '../../types';
+import FBIcon from '@/assets/icons/fb.svg';
+import TelegramIcon from '@/assets/icons/telegram.svg';
+import TwitterIcon from '@/assets/icons/twitter.svg';
+import { ArticleService } from '@/services/article';
+import { Article, ArticleCategory, articleCategories } from '@/types';
 
-type PageParams = { category: ArticleCategory; id: string };
+type PageParams = { slug: string };
 
 type ArticleProps = {
   article: Article;
-  otherArticle: Pick<Article, 'id' | 'categories' | 'title' | 'subCategories'> | null;
+  otherArticle: Pick<Article, 'id' | 'categories' | 'title' | 'subCategories' | 'slug'> | null;
   params: PageParams;
 };
 
@@ -30,7 +30,7 @@ const ArticlePage: NextPage<ArticleProps> = ({ article, otherArticle, params }) 
         title={article.title}
         description={' '}
         openGraph={{ title: article.title, description: ' ', images: [{ url: article.image }] }}
-        canonical={`${process.env.NEXT_PUBLIC_APP_URL}/${params.category}/${params.id}`}
+        canonical={`${process.env.NEXT_PUBLIC_APP_URL}/post/${params.slug}`}
       />
       <Container py={{ base: '56px', md: '112px' }}>
         <VStack alignItems="center">
@@ -71,14 +71,14 @@ const ArticlePage: NextPage<ArticleProps> = ({ article, otherArticle, params }) 
               <Box>
                 <Heading size="sm">{t('article.otherArticles')}</Heading>
                 <Divider opacity={1} borderColor="black" borderBottomWidth={2} mt={6} mb={4} />
-                <Flex gap={2} mb={2}>
+                <Flex gap={2} mb={2} wrap="wrap">
                   {[...otherArticle.categories, ...otherArticle.subCategories].map((cat) => (
                     <NextLink key={cat} href={`/${cat}`}>
                       <Badge>{categoriesTranslations[cat]}</Badge>
                     </NextLink>
                   ))}
                 </Flex>
-                <NextLink href={`/${otherArticle.categories[0]}/${otherArticle.id}`}>
+                <NextLink href={`/post/${otherArticle.slug}`}>
                   <Link as="span">{otherArticle.title}</Link>
                 </NextLink>
               </Box>
@@ -100,7 +100,7 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
           .filter((cat) => cat !== ArticleCategory.all)
           .map((category) =>
             articlesByCategory[category].map((article) => ({
-              params: { category, id: String(article.id) },
+              params: { slug: article.slug },
               locale,
             })),
           )
@@ -113,10 +113,8 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
 
 export const getStaticProps: GetStaticProps<ArticleProps, PageParams> = async ({ locale, params }) => {
   const articles = await ArticleService.getAllArticles();
-  const article = articles.find(
-    (article) => String(article.id) === params?.id && article.categories.includes(params?.category),
-  );
-  const otherArticles = articles.filter((art) => String(art.id) !== params?.id);
+  const article = articles.find((article) => article.slug === params?.slug);
+  const otherArticles = articles.filter((article) => article.slug !== params?.slug);
   const randomIndex = Math.floor(Math.random() * otherArticles.length);
   const otherArticle = otherArticles[randomIndex];
 
@@ -135,6 +133,7 @@ export const getStaticProps: GetStaticProps<ArticleProps, PageParams> = async ({
             categories: otherArticle.categories,
             subCategories: otherArticle.subCategories,
             id: otherArticle.id,
+            slug: otherArticle.slug,
           }
         : null,
       params: params!,

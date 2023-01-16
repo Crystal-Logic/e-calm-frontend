@@ -8,13 +8,15 @@ import {
   ArticlesPreviewBySubCategory,
   articleCategories,
   articleSubCategories,
-} from '../types';
+} from '@/types';
+import { addSlugToArticles } from '@/utils';
+
 import { api } from './api';
 
 export const ArticleService = {
   getAllArticles: async () => {
     const { data } = await api.get<Article[]>('/posts');
-    return data;
+    return addSlugToArticles(data);
   },
   getArticlesByCategory: async (): Promise<ArticlesByCategory> => {
     const articles = await ArticleService.getAllArticles();
@@ -40,6 +42,7 @@ export const ArticleService = {
       title: article.title,
       categories: article.categories,
       subCategories: article.subCategories,
+      slug: article.slug,
     });
 
     return articleCategories.reduce(

@@ -5,7 +5,8 @@ import NextLink from 'next/link';
 import { Button, Center, Container, Grid, Heading } from '@chakra-ui/react';
 import { useTranslation } from 'next-i18next';
 
-import { ArticleCategory, ArticlesPreviewByCategory, articleCategories } from '../../types';
+import { ArticleCategory, ArticlesPreviewByCategory, articleCategories } from '@/types';
+
 import { ArticleCard } from '../ArticleCard';
 import { CategoriesNav } from '../CategoriesNav';
 
@@ -38,7 +39,7 @@ export const HomeArticles = ({ categoriesInfo, articles }: HomeArticlesProps) =>
         mt={4}
       >
         {articles[selectedCategory]?.map((article) => (
-          <NextLink key={article.id} href={`/${article.categories[0]}/${article.id}`}>
+          <NextLink key={article.id} href={`/post/${article.slug}`}>
             <ArticleCard article={article} />
           </NextLink>
         ))}
