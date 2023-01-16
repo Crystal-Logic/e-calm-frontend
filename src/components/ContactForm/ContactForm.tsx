@@ -3,7 +3,7 @@ import { ChangeEvent } from 'react';
 import { Button, Checkbox, FormControl, FormErrorMessage, Input, VStack } from '@chakra-ui/react';
 import { useTranslation } from 'next-i18next';
 
-import { ContactFormType } from '../../types';
+import { ContactFormType } from '@/types';
 
 type ContactFormProps = {
   form: ContactFormType;

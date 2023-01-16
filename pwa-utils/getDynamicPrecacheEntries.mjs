@@ -1,6 +1,6 @@
 import slugify from '@sindresorhus/slugify';
-import axios from 'axios';
 import path from 'path';
+import { request } from 'undici'
 
 const getSlugForArticle = (article) => slugify(article.title, { customReplacements: [['и', 'y']] });
 
@@ -10,14 +10,6 @@ const addSlugToArticles = (articles) => {
     slug: getSlugForArticle(article),
   }));
 };
-
-const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-  },
-});
 
 const locales = ['uk', 'ru'];
 const defaultLocale = 'uk';
@@ -48,7 +40,9 @@ const getPageEntry = (buildId, page, locale) => {
 };
 
 export const getDynamicPageEntries = async (buildId) => {
-  const articles = await api.get('/posts').then((res) => addSlugToArticles(res.data));
+  const { body } = await request(`${process.env.NEXT_PUBLIC_API_URL}/posts`);
+  const data = await body.json();
+  const articles = addSlugToArticles(data)
 
   return locales
     .map((locale) =>

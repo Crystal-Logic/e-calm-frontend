@@ -4,7 +4,7 @@ import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/provider';
 import { appWithTranslation, useTranslation } from 'next-i18next';
 import { DefaultSeo } from 'next-seo';
 

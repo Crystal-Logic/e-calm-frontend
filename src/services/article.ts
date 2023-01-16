@@ -1,3 +1,4 @@
+import { api } from '@/services/api';
 import {
   Article,
   ArticleCategory,
@@ -11,11 +12,9 @@ import {
 } from '@/types';
 import { addSlugToArticles } from '@/utils';
 
-import { api } from './api';
-
 export const ArticleService = {
   getAllArticles: async () => {
-    const { data } = await api.get<Article[]>('/posts');
+    const data = await api.get<Article[]>('/posts');
     return addSlugToArticles(data);
   },
   getArticlesByCategory: async (): Promise<ArticlesByCategory> => {
@@ -41,7 +40,7 @@ export const ArticleService = {
       image: article.image,
       title: article.title,
       categories: article.categories,
-      subCategories: article.subCategories,
+      sub_categories: article.sub_categories,
       slug: article.slug,
     });
 
@@ -66,7 +65,7 @@ export const ArticleService = {
     };
 
     articles.forEach((article) => {
-      article.subCategories.forEach((category) => {
+      article.sub_categories.forEach((category) => {
         articlesBySubCategory[category].push(article);
       });
     });

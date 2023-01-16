@@ -1,17 +1,17 @@
 import { useState } from 'react';
 
 import { Box, Container, Divider, Flex, Heading, Text, VStack } from '@chakra-ui/react';
-import { AxiosError } from 'axios';
 import { useTranslation } from 'next-i18next';
 
-import ECalmLogoWhite from '../../assets/icons/e-calm-logo-white.svg';
-import FBIcon from '../../assets/icons/fb.svg';
-import InstagramIcon from '../../assets/icons/instagram.svg';
-import TelegramIcon from '../../assets/icons/telegram.svg';
-import TridentIcon from '../../assets/icons/trident.svg';
-import TwitterIcon from '../../assets/icons/twitter.svg';
-import { FormService } from '../../services/form';
-import { ContactFormType, ContactFormVariant, navLinks } from '../../types';
+import ECalmLogoWhite from '@/assets/icons/e-calm-logo-white.svg';
+import FBIcon from '@/assets/icons/fb.svg';
+import InstagramIcon from '@/assets/icons/instagram.svg';
+import TelegramIcon from '@/assets/icons/telegram.svg';
+import TridentIcon from '@/assets/icons/trident.svg';
+import TwitterIcon from '@/assets/icons/twitter.svg';
+import { FormService } from '@/services/form';
+import { ContactFormType, ContactFormVariant, navLinks } from '@/types';
+
 import { ContactForm } from '../ContactForm';
 import { FormModalRef, FormModalState } from '../FormModal';
 import { NavLink } from '../NavLink';
@@ -40,16 +40,14 @@ export const Footer = () => {
     try {
       await FormService.submit(form);
     } catch (e) {
-      if (e instanceof AxiosError) {
-        const errors = e.response?.data;
-        if (errors?.phone) {
-          changeForm({ phoneError: errors.phone[0] });
-        }
-        if (errors.code && Object.keys(errors).length === 1) {
-          await FormService.otp({ phone: form.phone });
-          FormModalRef.current?.set(FormModalState.otp, form);
-          setForm(formInitialState);
-        }
+      const errors = e as { phone?: string[]; code?: string[] };
+      if (errors.phone) {
+        changeForm({ phoneError: errors.phone[0] });
+      }
+      if (errors.code && Object.keys(errors).length === 1) {
+        await FormService.otp({ phone: form.phone });
+        FormModalRef.current?.set(FormModalState.otp, form);
+        setForm(formInitialState);
       }
     }
   };
