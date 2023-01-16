@@ -18,7 +18,7 @@ export const ArticleCard = ({ article }: { article: ArticlePreview }) => {
       </AspectRatio>
       <Box p={4}>
         <HStack spacing={4} mb={4}>
-          {[...article.categories, ...article.subCategories].map((category) => (
+          {[...article.categories, ...article.sub_categories].map((category) => (
             <Badge key={category}>{categoriesTranslations[category]}</Badge>
           ))}
         </HStack>

@@ -3,11 +3,11 @@ import { createRef, useImperativeHandle, useState } from 'react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import { Modal, ModalBody, ModalContent, ModalHeader } from '@chakra-ui/modal';
 import { Box, Button, Heading, IconButton, Text, VStack } from '@chakra-ui/react';
-import { AxiosError } from 'axios';
 import { useTranslation } from 'next-i18next';
 
-import { FormService } from '../../services/form';
-import { ContactFormType, ContactFormVariant, FormModalType } from '../../types';
+import { FormService } from '@/services/form';
+import { ContactFormType, ContactFormVariant, FormModalType } from '@/types';
+
 import { ContactForm } from '../ContactForm';
 import { OtpForm } from '../OtpForm';
 
@@ -74,12 +74,10 @@ export const FormModal = () => {
       await FormService.submit(form);
       setForm(formInitialState);
       setState(FormModalState.success);
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        const errors = error.response?.data;
-        if (errors?.code) {
-          changeForm({ codeError: errors.code[0], showCodeResend: true });
-        }
+    } catch (e) {
+      const errors = e as { code?: string[] };
+      if (errors?.code) {
+        changeForm({ codeError: errors.code[0], showCodeResend: true });
       }
     }
   };
@@ -87,16 +85,14 @@ export const FormModal = () => {
   const handleSubmitContactForm = async () => {
     try {
       await FormService.submit(form);
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        const errors = error.response?.data;
-        if (errors?.phone) {
-          changeForm({ phoneError: errors.phone[0] });
-        }
-        if (errors.code && Object.keys(errors).length === 1) {
-          await FormService.otp({ phone: form.phone });
-          FormModalRef.current?.set(FormModalState.otp);
-        }
+    } catch (e) {
+      const errors = e as { phone?: string[]; code?: string[] };
+      if (errors?.phone) {
+        changeForm({ phoneError: errors.phone[0] });
+      }
+      if (errors.code && Object.keys(errors).length === 1) {
+        await FormService.otp({ phone: form.phone });
+        FormModalRef.current?.set(FormModalState.otp);
       }
     }
   };
@@ -105,9 +101,10 @@ export const FormModal = () => {
     try {
       changeForm({ showCodeResend: false, code: '', codeError: null });
       await FormService.otp({ phone: form.phone });
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        changeForm({ codeError: error.response?.data });
+    } catch (e) {
+      const error = e as string;
+      if (error) {
+        changeForm({ codeError: error });
       }
     }
   };

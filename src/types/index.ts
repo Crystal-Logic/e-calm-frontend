@@ -32,11 +32,11 @@ export type Article = {
   title: string;
   body: string;
   categories: ArticleCategory[];
-  subCategories: ArticleSubCategory[];
+  sub_categories: ArticleSubCategory[];
   slug: string;
 };
 
-export type ArticlePreview = Pick<Article, 'id' | 'image' | 'title' | 'categories' | 'subCategories' | 'slug'>;
+export type ArticlePreview = Pick<Article, 'id' | 'image' | 'title' | 'categories' | 'sub_categories' | 'slug'>;
 export type ArticlesByCategory = Record<ArticleCategory, Article[]>;
 export type ArticlesPreviewByCategory = Record<ArticleCategory, ArticlePreview[]>;
 export type ArticlesPreviewBySubCategory = Record<ArticleSubCategory, ArticlePreview[]>;
