@@ -1,5 +1,5 @@
+import _withBundleAnalyzer from '@next/bundle-analyzer';
 import _withPWA from 'next-pwa';
-import _withBundleAnalyzer from '@next/bundle-analyzer'
 
 import { getBuildId } from './pwa-utils/getBuildId.mjs';
 import { getDynamicPrecacheEntries } from './pwa-utils/getDynamicPrecacheEntries.mjs';
@@ -7,7 +7,7 @@ import { getStaticPrecacheEntries } from './pwa-utils/getStaticPrecacheEntries.m
 
 const withBundleAnalyzer = _withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
-})
+});
 
 export default async (phase) => {
   const nextConfig = {
@@ -57,6 +57,7 @@ export default async (phase) => {
             '!fonts/**/*',
             '!icons/**/*',
             '!locales/**/*',
+            '!_headers',
           ],
         }),
         ...(await getDynamicPrecacheEntries(buildId)),
