@@ -21,6 +21,7 @@ type AppPropsWithLayout = AppProps & {
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const { t } = useTranslation('common');
+  const domain = process.env.NEXT_PUBLIC_APP_URL;
 
   const LayoutComponent = Component.getLayout || Layout;
   return (
@@ -32,10 +33,10 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
           type: 'website',
           title: t('header.title')!,
           description: t('header.subTitle')!,
-          url: process.env.NEXT_PUBLIC_APP_URL,
+          url: domain,
           images: [
             {
-              url: `${process.env.NEXT_PUBLIC_APP_URL}/og_logo.jpg`,
+              url: `${domain}/og_logo.jpg`,
               width: 1200,
               height: 630,
               alt: t('header.title')!,
@@ -64,6 +65,10 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
         <link rel="icon" type="image/png" sizes="48x48" href="/icons/icon-48x48.png" />
         <link rel="manifest" href="/manifest.json" />
+        <link rel="canonical" href={domain} />
+        <link rel="alternate" hrefLang="ru" href={`${domain}/ru`} />
+        <link rel="alternate" hrefLang="uk" href={domain} />
+        <link rel="alternate" hrefLang="x-default" href={domain} />
       </Head>
       <LayoutComponent>
         <Component {...pageProps} />
