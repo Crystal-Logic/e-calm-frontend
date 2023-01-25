@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { AspectRatio, Badge, Box, HStack, Heading } from '@chakra-ui/react';
+import { AspectRatio, Badge, Box, Flex, Heading } from '@chakra-ui/react';
 import { useTranslation } from 'next-i18next';
 
 import { ArticlePreview } from '@/types';
@@ -17,11 +17,11 @@ export const ArticleCard = ({ article }: { article: ArticlePreview }) => {
         </Box>
       </AspectRatio>
       <Box p={4}>
-        <HStack spacing={4} mb={4}>
+        <Flex wrap="wrap" gap={3} mb={4}>
           {[...article.categories, ...article.sub_categories].map((category) => (
             <Badge key={category}>{categoriesTranslations[category]}</Badge>
           ))}
-        </HStack>
+        </Flex>
         <Heading size={{ base: 'xxs', md: 'xs' }}>{article.title}</Heading>
       </Box>
     </Box>
